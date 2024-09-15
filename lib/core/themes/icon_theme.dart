@@ -15,13 +15,14 @@ class SvgAssets {
   static const String check = 'assets/icons/check.svg';
   static const String close = 'assets/icons/close.svg';
   
-  static const String eyeInvisibility = 'assets/icons/eyeInvisibility.svg';
-  static const String eyeVisibility = 'assets/icons/eyeVisibility.svg';
+  static const String eyeInvisibility = 'assets/icons/eye_invisibility.svg';
+  static const String eyeVisibility = 'assets/icons/eye_visibility.svg';
 
   static const String dolar = 'assets/icons/dolar.svg';
   static const String filter = 'assets/icons/filter.svg';
   static const String location = 'assets/icons/location.svg';
   static const String search = 'assets/icons/search.svg';
 
+  static const String logoApp = 'assets/img/logo.svg';
 
 }
