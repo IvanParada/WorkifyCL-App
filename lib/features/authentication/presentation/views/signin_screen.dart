@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -122,12 +124,14 @@ class SignInScreen extends StatelessWidget {
                             GestureDetector(
                               onTap: () {
                                 final formState = _formKey.currentState;
+
                                 if (formState != null &&
                                     formState.saveAndValidate()) {
                                   final email =
                                       formState.fields['email']?.value;
                                   final password =
                                       formState.fields['password']?.value;
+                                  log('credenciales signin: ( email: $email , password: $password)');
                                   context
                                       .read<AuthenticationCubit>()
                                       .logIn(email, password);

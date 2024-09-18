@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -40,7 +42,7 @@ class RecoveryScreen extends StatelessWidget {
                       color: AppColors.textSecondary.withOpacity(0.1),
                     ),
                   ),
-                 Padding(
+                  Padding(
                     padding: const EdgeInsets.only(top: 50, left: 30),
                     child: Row(
                       children: [
@@ -93,17 +95,18 @@ class RecoveryScreen extends StatelessWidget {
                               validator: validateEmail,
                               keyboardType: TextInputType.emailAddress,
                             ),
-                       
-                            
                             const SizedBox(height: 100),
                             GestureDetector(
                               onTap: () {
                                 final formState = _formKey.currentState;
+
                                 if (formState != null &&
                                     formState.saveAndValidate()) {
-                   
+                                  final email =
+                                      formState.fields['email']?.value;
+                                  log('email recovery $email');
+                                  context.push('/recovery-step-2');
                                 }
-                                context.push('/recovery-step-2');
                               },
                               child: Container(
                                 width: MediaQuery.of(context).size.width * 0.7,
@@ -128,7 +131,6 @@ class RecoveryScreen extends StatelessWidget {
                 ],
               ),
             ),
-            
           ],
         ),
       ),

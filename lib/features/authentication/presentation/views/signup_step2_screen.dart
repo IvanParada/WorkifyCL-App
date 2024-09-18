@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -83,8 +85,10 @@ class SignUpVerifyScreen extends StatelessWidget {
                   const SizedBox(height: 20),
                   BlocBuilder<AuthenticationCubit, AuthenticationState>(
                     builder: (contextCubit, stateCubit) {
-                      final List<FocusNode> focusNodes = List.generate(6, (_) => FocusNode());
-                      final List<TextEditingController> controllers = List.generate(6, (_) => TextEditingController());
+                      final List<FocusNode> focusNodes =
+                          List.generate(6, (_) => FocusNode());
+                      final List<TextEditingController> controllers =
+                          List.generate(6, (_) => TextEditingController());
 
                       return FormBuilder(
                         key: _formKey,
@@ -96,7 +100,8 @@ class SignUpVerifyScreen extends StatelessWidget {
                                 return AutoFocusTextField(
                                   controller: controllers[index],
                                   focusNode: focusNodes[index],
-                                  nextFocusNode: index < 5 ? focusNodes[index + 1] : null,
+                                  nextFocusNode:
+                                      index < 5 ? focusNodes[index + 1] : null,
                                   onChanged: (value) {
                                     // Optional: handle changes
                                   },
@@ -107,11 +112,12 @@ class SignUpVerifyScreen extends StatelessWidget {
                             GestureDetector(
                               onTap: () {
                                 final formState = _formKey.currentState;
-                                if (formState != null && formState.saveAndValidate()) {
-                                  // Gather all codes
-                                  final code = controllers.map((c) => c.text).join();
-                                  print('Código ingresado: $code');
-                                  // Handle verification logic here
+                                final code =
+                                    controllers.map((c) => c.text).join();
+
+                                if (formState != null && code.length == 6) {
+                                  log('código de verificacion: $code');
+                                  context.push('/');
                                 }
                               },
                               child: Container(

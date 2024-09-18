@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -152,17 +154,25 @@ class SignUpScreen extends StatelessWidget {
                             GestureDetector(
                               onTap: () {
                                 final formState = _formKey.currentState;
-                                if (formState != null &&
-                                    formState.saveAndValidate()) {
-                                  final name = formState.fields['name']?.value;
-                                  final email =
-                                      formState.fields['email']?.value;
-                                  final password =
-                                      formState.fields['password']?.value;
-                                  final phone =
-                                      formState.fields['phone']?.value;
+                                if (formState != null) {
+                                  if (formState.fields['password']!.value !=
+                                      formState
+                                          .fields['password-repeat']!.value) {
+                                    log('contraseñas deben ser iguales');
+                                  }
+                                  if (formState.saveAndValidate()) {
+                                    final name =
+                                        formState.fields['name']?.value;
+                                    final email =
+                                        formState.fields['email']?.value;
+                                    final password =
+                                        formState.fields['password']?.value;
+                                    final phone =
+                                        formState.fields['phone']?.value;
+                                    log('datos usuarios: (name: $name, email: $email, password: $password, phone: $phone)');
+                                    context.push('/verify-signup');
+                                  }
                                 }
-                                context.push('/verify-signup');
                               },
                               child: Container(
                                 width: MediaQuery.of(context).size.width * 0.7,
