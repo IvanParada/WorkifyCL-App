@@ -8,10 +8,8 @@ import 'package:go_router/go_router.dart';
 import 'package:workify_cl_app/core/themes/color_theme.dart';
 import 'package:workify_cl_app/core/themes/icon_theme.dart';
 import 'package:workify_cl_app/core/themes/texts_theme.dart';
-import 'package:workify_cl_app/core/validators.dart';
 import 'package:workify_cl_app/features/authentication/presentation/cubit/authentication_cubit.dart';
 import 'package:workify_cl_app/features/authentication/presentation/widgets/auto_focus_widget.dart';
-import 'package:workify_cl_app/features/authentication/presentation/widgets/text_field_widget.dart';
 
 class SignUpVerifyScreen extends StatelessWidget {
   SignUpVerifyScreen({super.key});
