@@ -29,7 +29,9 @@ String? validateNamesAndSurnames(String? value) {
     return 'El campo de nombres y apellidos es obligatorio';
   }
   
-  final nameRegExp = RegExp(r'^([A-ZÁÉÍÓÚÜ][a-záéíóúü]*\s?){1,3}([A-ZÁÉÍÓÚÜ][a-záéíóúü]*\s?){1,2}$');
+  final nameRegExp = RegExp(r'^([A-Za-zÁÉÍÓÚáéíóúüÜ]+(\s[A-Za-zÁÉÍÓÚáéíóúüÜ]+){1,4})$');
+
+
   
   if (!nameRegExp.hasMatch(value.trim())) {
     return 'El formato es incorrecto. Permite hasta 3 nombres y 2 apellidos, solo letras y acentos.';
