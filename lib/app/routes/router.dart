@@ -5,9 +5,20 @@ import 'package:workify_cl_app/features/authentication/presentation/views/recove
 import 'package:workify_cl_app/features/authentication/presentation/views/signin_screen.dart';
 import 'package:workify_cl_app/features/authentication/presentation/views/signup_screen.dart';
 import 'package:workify_cl_app/features/authentication/presentation/views/signup_step2_screen.dart';
+import 'package:workify_cl_app/features/home/presentation/views/home_screen.dart';
+import 'package:workify_cl_app/features/home/presentation/views/splash_screen.dart';
 
 final GoRouter _router = GoRouter(
+  initialLocation: '/',
   routes: [
+    GoRoute(
+      path: '/',
+      builder: (context, state) => const SplashScreen(),
+    ),
+    GoRoute(
+      path: '/home',
+      builder: (context, state) => const HomeScreen(),
+    ),
     GoRoute(
       path: '/signin',
       builder: (context, state) => SignInScreen(),
@@ -31,10 +42,6 @@ final GoRouter _router = GoRouter(
     GoRoute(
       path: '/recovery-step-3',
       builder: (context, state) => RecoveryStep3Screen(),
-    ),
-    GoRoute(
-      path: '/',
-      builder: (context, state) => SignInScreen(),
     ),
   ],
 );

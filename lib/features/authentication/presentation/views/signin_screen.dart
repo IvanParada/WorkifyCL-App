@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:go_router/go_router.dart';
+import 'package:workify_cl_app/core/enums/enums_state.dart';
 import 'package:workify_cl_app/core/themes/color_theme.dart';
 import 'package:workify_cl_app/core/themes/icon_theme.dart';
 import 'package:workify_cl_app/core/themes/texts_theme.dart';
@@ -15,9 +16,9 @@ import 'package:workify_cl_app/features/authentication/presentation/widgets/text
 class SignInScreen extends StatelessWidget {
   SignInScreen({super.key});
   final _formKey = GlobalKey<FormBuilderState>();
-
   @override
   Widget build(BuildContext context) {
+    final authCubit = BlocProvider.of<AuthenticationCubit>(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -68,27 +69,39 @@ class SignInScreen extends StatelessWidget {
                     style: appTextTheme.bodySmall,
                   ),
                   const SizedBox(height: 20),
-                  BlocBuilder<AuthenticationCubit, AuthenticationState>(
-                    builder: (contextCubit, stateCubit) {
-                      return FormBuilder(
-                        key: _formKey,
-                        child: Column(
-                          children: [
-                            const TextFieldWidget(
-                              name: 'email',
-                              labelText: 'Correo electrónico',
-                              obscureText: false,
-                              validator: validateEmail,
-                              keyboardType: TextInputType.emailAddress,
-                            ),
-                            const SizedBox(height: 20),
-                             TextFieldWidget(
-                              name: 'password',
-                              labelText: 'Contraseña',
-                              obscureText: stateCubit.obscurePassword,
-                              validator: validatePassword,
-                              keyboardType: TextInputType.visiblePassword,
-                              suffixIcon: GestureDetector(
+                  BlocListener<AuthenticationCubit, AuthenticationState>(
+                    listener: (context, state) {
+                      if (state.status == Status.success) {
+                        context.go('/home');
+                      } else if (state.status == Status.failure) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                              content: Text('Error al iniciar sesión')),
+                        );
+                      }
+                    },
+                    child:
+                        BlocBuilder<AuthenticationCubit, AuthenticationState>(
+                      builder: (contextCubit, stateCubit) {
+                        return FormBuilder(
+                          key: _formKey,
+                          child: Column(
+                            children: [
+                              const TextFieldWidget(
+                                name: 'email',
+                                labelText: 'Correo electrónico',
+                                obscureText: false,
+                                validator: validateEmail,
+                                keyboardType: TextInputType.emailAddress,
+                              ),
+                              const SizedBox(height: 20),
+                              TextFieldWidget(
+                                name: 'password',
+                                labelText: 'Contraseña',
+                                obscureText: stateCubit.obscurePassword,
+                                validator: validatePassword,
+                                keyboardType: TextInputType.visiblePassword,
+                                suffixIcon: GestureDetector(
                                   child: SvgPicture.asset(
                                     stateCubit.obscurePassword == false
                                         ? SvgAssets.eyeInvisibility
@@ -101,61 +114,68 @@ class SignInScreen extends StatelessWidget {
                                         .showPassword();
                                   },
                                 ),
-                            ),
-                            const SizedBox(height: 10),
-                            GestureDetector(
-                              onTap: () => context.push('/recovery'),
-                              child: RichText(
-                                text: TextSpan(
-                                  children: <TextSpan>[
-                                    TextSpan(
+                              ),
+                              const SizedBox(height: 10),
+                              GestureDetector(
+                                onTap: () => context.push('/recovery'),
+                                child: RichText(
+                                  text: TextSpan(
+                                    children: <TextSpan>[
+                                      TextSpan(
                                         text: '¿Has olvidado tu contraseña? ',
-                                        style: appTextTheme.bodySmall),
-                                    TextSpan(
+                                        style: appTextTheme.bodySmall,
+                                      ),
+                                      TextSpan(
                                         text: 'Recuperar',
                                         style: appTextTheme.bodySmall!.copyWith(
-                                            fontWeight: FontWeight.w600,
-                                            color: AppColors.info)),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 100),
-                            GestureDetector(
-                              onTap: () {
-                                final formState = _formKey.currentState;
-
-                                if (formState != null &&
-                                    formState.saveAndValidate()) {
-                                  final email =
-                                      formState.fields['email']?.value;
-                                  final password =
-                                      formState.fields['password']?.value;
-                                  log('credenciales signin: ( email: $email , password: $password)');
-                                  context
-                                      .read<AuthenticationCubit>()
-                                      .logIn(email, password);
-                                }
-                              },
-                              child: Container(
-                                width: MediaQuery.of(context).size.width * 0.7,
-                                height: 40,
-                                decoration: BoxDecoration(
-                                    color: AppColors.primary,
-                                    borderRadius: BorderRadius.circular(20)),
-                                child: Center(
-                                  child: Text(
-                                    'Iniciar sesión',
-                                    style: appTextTheme.bodySmall!.copyWith(
-                                        color: AppColors.textSecondary),
+                                          fontWeight: FontWeight.w600,
+                                          color: AppColors.info,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
+                              const SizedBox(height: 100),
+                              GestureDetector(
+                                onTap: () {
+                                  final formState = _formKey.currentState;
+
+                                  if (formState != null &&
+                                      formState.saveAndValidate()) {
+                                    final email =
+                                        formState.fields['email']?.value;
+                                    final password =
+                                        formState.fields['password']?.value;
+
+                                    contextCubit
+                                        .read<AuthenticationCubit>()
+                                        .logIn(email, password);
+                                  }
+                                },
+                                child: Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.7,
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                    color: AppColors.primary,
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      'Iniciar sesión',
+                                      style: appTextTheme.bodySmall!.copyWith(
+                                        color: AppColors.textSecondary,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 ],
               ),

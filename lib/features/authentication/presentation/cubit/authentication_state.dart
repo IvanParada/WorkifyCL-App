@@ -6,6 +6,7 @@ class AuthenticationState extends Equatable {
   final bool obscureRepeatPassword;
   final String? email;
   final String? password;
+  final LoginResponseModel? loginUserData;
 
   const AuthenticationState({
     this.status,
@@ -13,6 +14,7 @@ class AuthenticationState extends Equatable {
     this.obscureRepeatPassword = true,
     this.email,
     this.password,
+    this.loginUserData,
   });
 
   AuthenticationState copyWith({
@@ -20,7 +22,8 @@ class AuthenticationState extends Equatable {
     bool? obscurePassword,
     bool? obscureRepeatPassword,
     String? email,
-    String? password
+    String? password,
+    LoginResponseModel? loginUserData,
   }) {
     return AuthenticationState(
       status: status ?? this.status,
@@ -28,6 +31,7 @@ class AuthenticationState extends Equatable {
       obscureRepeatPassword: obscureRepeatPassword ?? this.obscureRepeatPassword,
       email: email ?? this.email,
       password: password ?? this.password,
+      loginUserData: loginUserData ?? this.loginUserData,
     );
   }
 
@@ -38,5 +42,6 @@ class AuthenticationState extends Equatable {
         obscureRepeatPassword,
         email,
         password,
+        loginUserData,
       ];
 }
