@@ -1,31 +1,42 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:workify_cl_app/core/themes/color_theme.dart';
-import 'package:workify_cl_app/features/authentication/presentation/cubit/authentication_cubit.dart';
+import 'package:workify_cl_app/features/home/presentation/widgets/card_job_widget.dart';
+import 'package:workify_cl_app/features/home/presentation/widgets/custom_search_bar_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(),
-      body: GestureDetector(
-        onTap: () {
-          BlocProvider.of<AuthenticationCubit>(context).logOut();
-          context.go('/signin');
-        },
-        child: Container(
-          width: MediaQuery.of(context).size.width * 0.9,
-          height: MediaQuery.of(context).size.height * 0.1,
-          decoration: const BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(20)),
-            color: AppColors.error,
+      backgroundColor: AppColors.background,
+      body: SafeArea(
+          child: Column(
+        children: [
+          const CustomSearchBarWidget(),
+          SizedBox(
+            height: size.height * .02,
           ),
-          child: const Text('Cerrar Sesión'),
-        ),
-      ),
+          SingleChildScrollView(
+            child: SizedBox(
+              height: size.height * 0.75,
+              child: Column(
+                children: [
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: 10,
+                      itemBuilder: (context, index) {
+                        return  CardJobWidget(index: index);
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          )
+        ],
+      )),
     );
   }
 }

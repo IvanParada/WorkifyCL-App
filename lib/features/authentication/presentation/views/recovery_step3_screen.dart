@@ -77,7 +77,7 @@ class RecoveryStep3Screen extends StatelessWidget {
                 children: [
                   Text(
                     'Ingresa tu nueva contraseña y estarás listo para volver a ingresar a la aplicación.',
-                    style: appTextTheme.bodySmall,
+                    style: appTextTheme.bodyMedium,
                   ),
                   const SizedBox(height: 20),
                   BlocBuilder<AuthenticationCubit, AuthenticationState>(
@@ -151,7 +151,7 @@ class RecoveryStep3Screen extends StatelessWidget {
                                 child: Center(
                                   child: Text(
                                     'Cambiar',
-                                    style: appTextTheme.bodySmall!.copyWith(
+                                    style: appTextTheme.bodyMedium!.copyWith(
                                         color: AppColors.textSecondary),
                                   ),
                                 ),

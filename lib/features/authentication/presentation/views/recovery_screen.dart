@@ -79,7 +79,7 @@ class RecoveryScreen extends StatelessWidget {
                 children: [
                   Text(
                     'Ingresa tu correo electrónico para solicitar el código de seguirdad y cambiar tu contraseña.',
-                    style: appTextTheme.bodySmall,
+                    style: appTextTheme.bodyMedium,
                   ),
                   const SizedBox(height: 20),
                   BlocBuilder<AuthenticationCubit, AuthenticationState>(
@@ -117,7 +117,7 @@ class RecoveryScreen extends StatelessWidget {
                                 child: Center(
                                   child: Text(
                                     'Solicitar',
-                                    style: appTextTheme.bodySmall!.copyWith(
+                                    style: appTextTheme.bodyMedium!.copyWith(
                                         color: AppColors.textSecondary),
                                   ),
                                 ),

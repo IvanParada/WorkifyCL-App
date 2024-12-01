@@ -1,12 +1,16 @@
 import 'package:go_router/go_router.dart';
+import 'package:flutter/material.dart';
+import 'package:workify_cl_app/features/home/presentation/views/home_screen.dart';
+import 'package:workify_cl_app/features/authentication/presentation/views/signin_screen.dart';
+import 'package:workify_cl_app/features/authentication/presentation/views/signup_screen.dart';
 import 'package:workify_cl_app/features/authentication/presentation/views/recovery_screen.dart';
 import 'package:workify_cl_app/features/authentication/presentation/views/recovery_step2_screen.dart';
 import 'package:workify_cl_app/features/authentication/presentation/views/recovery_step3_screen.dart';
-import 'package:workify_cl_app/features/authentication/presentation/views/signin_screen.dart';
-import 'package:workify_cl_app/features/authentication/presentation/views/signup_screen.dart';
-import 'package:workify_cl_app/features/authentication/presentation/views/signup_step2_screen.dart';
-import 'package:workify_cl_app/features/home/presentation/views/home_screen.dart';
 import 'package:workify_cl_app/features/home/presentation/views/splash_screen.dart';
+import 'package:workify_cl_app/features/main_screen.dart';
+import 'package:workify_cl_app/features/profile/presentation/view/profile_screen.dart';
+
+final GlobalKey<NavigatorState> _shellNavigatorKey = GlobalKey<NavigatorState>();
 
 final GoRouter _router = GoRouter(
   initialLocation: '/',
@@ -16,20 +20,12 @@ final GoRouter _router = GoRouter(
       builder: (context, state) => const SplashScreen(),
     ),
     GoRoute(
-      path: '/home',
-      builder: (context, state) => const HomeScreen(),
-    ),
-    GoRoute(
       path: '/signin',
       builder: (context, state) => SignInScreen(),
     ),
     GoRoute(
       path: '/signup',
       builder: (context, state) => SignUpScreen(),
-    ),
-    GoRoute(
-      path: '/verify-signup',
-      builder: (context, state) => SignUpVerifyScreen(),
     ),
     GoRoute(
       path: '/recovery',
@@ -42,6 +38,20 @@ final GoRouter _router = GoRouter(
     GoRoute(
       path: '/recovery-step-3',
       builder: (context, state) => RecoveryStep3Screen(),
+    ),
+    ShellRoute(
+      navigatorKey: _shellNavigatorKey,
+      builder: (context, state, child) => MainScreen(child: child),
+      routes: [
+        GoRoute(
+          path: '/home',
+          builder: (context, state) => const HomeScreen(),
+        ),
+        GoRoute(
+          path: '/profile',
+          builder: (context, state) => const ProfileScreen(),
+        ),
+      ],
     ),
   ],
 );

@@ -66,7 +66,7 @@ class SignInScreen extends StatelessWidget {
                 children: [
                   Text(
                     'Ingresa tus credenciales para ingresar a la aplicación.',
-                    style: appTextTheme.bodySmall,
+                    style: appTextTheme.bodyMedium,
                   ),
                   const SizedBox(height: 20),
                   BlocListener<AuthenticationCubit, AuthenticationState>(
@@ -123,11 +123,11 @@ class SignInScreen extends StatelessWidget {
                                     children: <TextSpan>[
                                       TextSpan(
                                         text: '¿Has olvidado tu contraseña? ',
-                                        style: appTextTheme.bodySmall,
+                                        style: appTextTheme.bodyMedium,
                                       ),
                                       TextSpan(
                                         text: 'Recuperar',
-                                        style: appTextTheme.bodySmall!.copyWith(
+                                        style: appTextTheme.bodyMedium!.copyWith(
                                           fontWeight: FontWeight.w600,
                                           color: AppColors.info,
                                         ),
@@ -164,7 +164,7 @@ class SignInScreen extends StatelessWidget {
                                   child: Center(
                                     child: Text(
                                       'Iniciar sesión',
-                                      style: appTextTheme.bodySmall!.copyWith(
+                                      style: appTextTheme.bodyMedium!.copyWith(
                                         color: AppColors.textSecondary,
                                       ),
                                     ),
@@ -188,10 +188,10 @@ class SignInScreen extends StatelessWidget {
                   children: [
                     TextSpan(
                         text: '¿Aún no tienes cuenta? ',
-                        style: appTextTheme.bodySmall),
+                        style: appTextTheme.bodyMedium),
                     TextSpan(
                       text: 'Registrarse',
-                      style: appTextTheme.bodySmall!.copyWith(
+                      style: appTextTheme.bodyMedium!.copyWith(
                           fontWeight: FontWeight.w600, color: AppColors.info),
                     ),
                   ],

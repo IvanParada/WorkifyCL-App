@@ -79,7 +79,7 @@ class SignUpScreen extends StatelessWidget {
                 children: [
                   Text(
                     'Ingresa los datos solicitados para crear tu cuenta.',
-                    style: appTextTheme.bodySmall,
+                    style: appTextTheme.bodyMedium,
                   ),
                   const SizedBox(height: 20),
                   BlocBuilder<AuthenticationCubit, AuthenticationState>(
@@ -183,7 +183,7 @@ class SignUpScreen extends StatelessWidget {
                                 child: Center(
                                   child: Text(
                                     'Registrarse',
-                                    style: appTextTheme.bodySmall!.copyWith(
+                                    style: appTextTheme.bodyMedium!.copyWith(
                                         color: AppColors.textSecondary),
                                   ),
                                 ),

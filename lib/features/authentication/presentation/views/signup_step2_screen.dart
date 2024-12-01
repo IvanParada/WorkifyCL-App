@@ -78,7 +78,7 @@ class SignUpVerifyScreen extends StatelessWidget {
                 children: [
                   Text(
                     'Ingresa el código de verificación que se ha enviado a tu correo electrónico.',
-                    style: appTextTheme.bodySmall,
+                    style: appTextTheme.bodyMedium,
                   ),
                   const SizedBox(height: 20),
                   BlocBuilder<AuthenticationCubit, AuthenticationState>(
@@ -127,7 +127,7 @@ class SignUpVerifyScreen extends StatelessWidget {
                                 child: Center(
                                   child: Text(
                                     'Verificar',
-                                    style: appTextTheme.bodySmall!.copyWith(
+                                    style: appTextTheme.bodyMedium!.copyWith(
                                         color: AppColors.textSecondary),
                                   ),
                                 ),

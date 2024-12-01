@@ -7,8 +7,13 @@ const TextTheme appTextTheme = TextTheme(
     fontWeight: FontWeight.w600,
     color: AppColors.textSecondary,
   ),
-  bodySmall: TextStyle(
+  bodyMedium: TextStyle(
     fontSize: 14,
+    fontWeight: FontWeight.w400,
+    color:  AppColors.textPrimary,
+  ),
+  bodySmall: TextStyle(
+    fontSize: 12,
     fontWeight: FontWeight.w400,
     color:  AppColors.textPrimary,
   ),

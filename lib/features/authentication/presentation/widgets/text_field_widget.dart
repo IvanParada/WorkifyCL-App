@@ -32,7 +32,7 @@ final TextInputType? keyboardType;
         suffixIcon: suffixIcon,
         labelText: labelText,
         labelStyle:
-            appTextTheme.bodySmall!.copyWith(fontWeight: FontWeight.w300),
+            appTextTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w300),
         contentPadding: const EdgeInsets.only(bottom: 2, left: 30),
         border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30),
