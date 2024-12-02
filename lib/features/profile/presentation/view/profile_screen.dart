@@ -61,8 +61,8 @@ class ProfileScreen extends StatelessWidget {
                   color: AppColors.primary),
             ),
           ),
-          const ProfileOptionWidget(),
-          const ProfileOptionWidget(),
+          const ProfileOptionWidget(title: 'Mis Datos',),
+          const ProfileOptionWidget(title: 'Mis Publicaciones',),
           SizedBox(
             height: size.height * 0.3,
           ),

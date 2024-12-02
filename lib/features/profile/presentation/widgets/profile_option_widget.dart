@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:workify_cl_app/core/themes/color_theme.dart';
@@ -9,7 +7,10 @@ import 'package:workify_cl_app/core/themes/texts_theme.dart';
 class ProfileOptionWidget extends StatelessWidget {
   const ProfileOptionWidget({
     super.key,
+    required this.title,
   });
+
+  final String title;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -19,9 +20,7 @@ class ProfileOptionWidget extends StatelessWidget {
         vertical: size.height * .01,
       ),
       child: GestureDetector(
-        onTap: () {
-          log('==> ir a la opcion');
-        },
+        onTap: () {},
         child: Container(
           height: 50,
           decoration: BoxDecoration(
@@ -45,7 +44,7 @@ class ProfileOptionWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Mis Datos',
+                  title,
                   style: appTextTheme.bodyMedium!.copyWith(
                     fontWeight: FontWeight.w600,
                   ),

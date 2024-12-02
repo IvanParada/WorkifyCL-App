@@ -29,7 +29,6 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
         loginUserData: res,
         status: Status.success,
       ));
-      print(res.token);
       return;
     }
 

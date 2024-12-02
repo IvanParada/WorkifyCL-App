@@ -1,10 +1,12 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:workify_cl_app/core/themes/color_theme.dart';
 import 'package:workify_cl_app/core/themes/icon_theme.dart';
 import 'package:workify_cl_app/core/themes/texts_theme.dart';
+import 'package:workify_cl_app/features/posts/presentation/cubit/post_cubit.dart';
 
 class CardJobWidget extends StatelessWidget {
   const CardJobWidget({
@@ -15,16 +17,13 @@ class CardJobWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    //TODO: Fix center text
     return Padding(
       padding: EdgeInsets.symmetric(
         horizontal: size.width * .05,
         vertical: size.height * .01,
       ),
       child: GestureDetector(
-        onTap: () {
-          log('==> ir a la publicación $index');
-        },
+        onTap: () {},
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),

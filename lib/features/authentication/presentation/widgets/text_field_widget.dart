@@ -11,7 +11,12 @@ class TextFieldWidget extends StatelessWidget {
     this.onTap,
     this.suffixIcon,
     required this.name,
-    required this.labelText, this.keyboardType,
+    required this.labelText,
+    this.keyboardType,
+    this.maxLines,
+    this.onChanged,
+    this.initialValue,
+    this.controller,
   });
 
   final bool? obscureText;
@@ -20,20 +25,28 @@ class TextFieldWidget extends StatelessWidget {
   final Widget? suffixIcon;
   final String name;
   final String labelText;
-final TextInputType? keyboardType;
+  final TextInputType? keyboardType;
+  final int? maxLines;
+  final ValueChanged<String?>? onChanged;
+  final String? initialValue;
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
     return FormBuilderTextField(
       name: name,
+      controller: controller,
+      initialValue: initialValue,
       cursorHeight: 15,
       obscureText: obscureText ?? false,
+      maxLines: maxLines ?? 1,
       decoration: InputDecoration(
         suffixIcon: suffixIcon,
         labelText: labelText,
+        alignLabelWithHint: true,
         labelStyle:
-            appTextTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w300),
-        contentPadding: const EdgeInsets.only(bottom: 2, left: 30),
+            appTextTheme.bodySmall!.copyWith(fontWeight: FontWeight.w300),
+        contentPadding: const EdgeInsets.only(bottom: 2, left: 30, right: 30),
         border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30),
             borderSide: const BorderSide(color: AppColors.textPrimary)),
@@ -47,6 +60,7 @@ final TextInputType? keyboardType;
       ),
       keyboardType: keyboardType,
       validator: validator,
+      onChanged: onChanged,
     );
   }
 }

@@ -1,4 +1,3 @@
-
 String? validateEmail(String? value) {
   if (value == null || value.isEmpty) {
     return 'El correo electrónico es obligatorio';
@@ -28,15 +27,14 @@ String? validateNamesAndSurnames(String? value) {
   if (value == null || value.isEmpty) {
     return 'El campo de nombres y apellidos es obligatorio';
   }
-  
-  final nameRegExp = RegExp(r'^([A-Za-zÁÉÍÓÚáéíóúüÜ]+(\s[A-Za-zÁÉÍÓÚáéíóúüÜ]+){1,4})$');
 
+  final nameRegExp =
+      RegExp(r'^([A-Za-zÁÉÍÓÚáéíóúüÜ]+(\s[A-Za-zÁÉÍÓÚáéíóúüÜ]+){1,4})$');
 
-  
   if (!nameRegExp.hasMatch(value.trim())) {
     return 'El formato es incorrecto. Permite hasta 3 nombres y 2 apellidos, solo letras y acentos.';
   }
-  
+
   return null;
 }
 
@@ -46,9 +44,17 @@ String? validateChileanPhoneNumber(String? value) {
   }
 
   final phoneRegExp = RegExp(r'^(?:\+56\s?)?(?:9\s?)?\d{4}\s?\d{4}$');
-  
+
   if (!phoneRegExp.hasMatch(value.trim())) {
     return 'Debe tener el formato +56 9 1234 5678';
+  }
+
+  return null;
+}
+
+String? validateTitlePost(String? value) {
+  if (value == null || value.isEmpty) {
+    return 'El titulo es obligatorio';
   }
 
   return null;

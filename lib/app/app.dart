@@ -6,6 +6,9 @@ import 'package:workify_cl_app/core/networks/dio_client.dart';
 import 'package:workify_cl_app/features/authentication/data/datasource/auth_datasource.dart';
 import 'package:workify_cl_app/features/authentication/data/repository/auth_repository.dart';
 import 'package:workify_cl_app/features/authentication/presentation/cubit/authentication_cubit.dart';
+import 'package:workify_cl_app/features/posts/data/datasource/post_datasource.dart';
+import 'package:workify_cl_app/features/posts/data/repository/post_repository.dart';
+import 'package:workify_cl_app/features/posts/presentation/cubit/post_cubit.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -19,6 +22,15 @@ class MyApp extends StatelessWidget {
             const FlutterSecureStorage(),
             authRepository: AuthRepository(
               authDatasource: AuthDatasource(
+                dio: DioClient.dio,
+              ),
+            ),
+          ),
+        ),
+        BlocProvider(
+          create: (context) => PostCubit(
+            postRepository: PostRepository(
+              postDatasource: PostDatasource(
                 dio: DioClient.dio,
               ),
             ),

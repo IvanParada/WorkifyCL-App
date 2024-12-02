@@ -9,6 +9,7 @@ import 'package:workify_cl_app/features/authentication/presentation/views/recove
 import 'package:workify_cl_app/features/home/presentation/views/splash_screen.dart';
 import 'package:workify_cl_app/features/main_screen.dart';
 import 'package:workify_cl_app/features/profile/presentation/view/profile_screen.dart';
+import 'package:workify_cl_app/features/posts/presentation/views/add_post_screen.dart';
 
 final GlobalKey<NavigatorState> _shellNavigatorKey = GlobalKey<NavigatorState>();
 
@@ -50,6 +51,10 @@ final GoRouter _router = GoRouter(
         GoRoute(
           path: '/profile',
           builder: (context, state) => const ProfileScreen(),
+        ),
+        GoRoute(
+          path: '/add-post',
+          builder: (context, state) => const AddPostScreen(),
         ),
       ],
     ),

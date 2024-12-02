@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:workify_cl_app/features/authentication/presentation/cubit/authentication_cubit.dart';
+import 'package:workify_cl_app/features/posts/presentation/cubit/post_cubit.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -31,6 +32,7 @@ class SplashScreen extends StatelessWidget {
       final hasValidToken = await authCubit.validateToken();
 
       if (hasValidToken) {
+        BlocProvider.of<PostCubit>(context).getRegions();
         context.go('/home');
       } else {
         context.go('/signin');
