@@ -24,7 +24,7 @@ class ProfileOptionWidget extends StatelessWidget {
         child: Container(
           height: 50,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(10),
             color: AppColors.textSecondary,
             boxShadow: [
               BoxShadow(

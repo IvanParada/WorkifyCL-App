@@ -8,7 +8,7 @@ class ChipSelectorWidget extends StatelessWidget {
     required this.name,
     required this.options,
     this.initialValue,
-    this.borderRadius = 20.0,
+    this.borderRadius = 10.0,
     this.onChanged,
   });
 

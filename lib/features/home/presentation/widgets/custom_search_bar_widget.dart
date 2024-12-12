@@ -19,7 +19,7 @@ class CustomSearchBarWidget extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
                 border: Border.all(color: AppColors.primary),
-                borderRadius: BorderRadius.circular(20)),
+                borderRadius: BorderRadius.circular(10)),
             height: size.height * .05,
             width: size.width * .7,
             child: SearchBar(
@@ -47,7 +47,7 @@ class CustomSearchBarWidget extends StatelessWidget {
             width: 50,
             decoration: BoxDecoration(
               color: AppColors.primary,
-              borderRadius: BorderRadius.circular(100),
+              borderRadius: BorderRadius.circular(10),
             ),
             child: Padding(
               padding: const EdgeInsets.all(15),

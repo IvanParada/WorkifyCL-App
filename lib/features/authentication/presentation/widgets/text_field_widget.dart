@@ -48,13 +48,13 @@ class TextFieldWidget extends StatelessWidget {
             appTextTheme.bodySmall!.copyWith(fontWeight: FontWeight.w300),
         contentPadding: const EdgeInsets.only(bottom: 2, left: 30, right: 30),
         border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(30),
+            borderRadius: BorderRadius.circular(10),
             borderSide: const BorderSide(color: AppColors.textPrimary)),
         focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(30),
+            borderRadius: BorderRadius.circular(10),
             borderSide: const BorderSide(color: AppColors.textPrimary)),
         errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(30),
+          borderRadius: BorderRadius.circular(10),
           borderSide: const BorderSide(color: AppColors.error),
         ),
       ),
