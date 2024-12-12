@@ -15,7 +15,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
   final AuthRepository authRepository;
   final FlutterSecureStorage secureStorage;
 
-  void logIn(String email, String password) async {
+  Future<void> logIn(String email, String password) async {
     emit(state.copyWith(status: Status.loading));
     final res = await authRepository.loginUser(email, password);
 
@@ -35,17 +35,33 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     emit(state.copyWith(status: Status.failure));
   }
 
-  void showPassword() {
-    emit(state.copyWith(obscurePassword: !state.obscurePassword));
+  Future<void> signUp(
+      String email, String password, String name, int userPhone) async {
+    emit(state.copyWith(status: Status.loading));
+
+    final res = await authRepository.signUp(email, password, name, userPhone);
+    //TODO: ADD REPOSITORY
   }
 
-  void showRepeatPassword() {
-    emit(state.copyWith(obscureRepeatPassword: !state.obscureRepeatPassword));
+  Future<void> requestResetPassword() async {
+    emit(state.copyWith(status: Status.loading));
+
+    await authRepository.requestResetPassword();
+    //TODO: ADD SHOWDIALOG
   }
 
-  void logOut() async {
-    await secureStorage.deleteAll();
-    emit(state.copyWith(status: Status.initial));
+  Future<void> resetPassword(int resetCode, String newPassword) async {
+    emit(state.copyWith(status: Status.loading));
+
+    await authRepository.resetPassword(resetCode, newPassword);
+    //TODO: ADD REPOSITORY
+  }
+
+  Future<void> verifyEmail(email, code) async {
+    emit(state.copyWith(status: Status.loading));
+    final res = authRepository.verifyEmail(email, code);
+
+    //TODO: ADD REPOSITORY
   }
 
   Future<bool> validateToken() async {
@@ -84,5 +100,18 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
 
       return false;
     }
+  }
+
+  void showPassword() {
+    emit(state.copyWith(obscurePassword: !state.obscurePassword));
+  }
+
+  void showRepeatPassword() {
+    emit(state.copyWith(obscureRepeatPassword: !state.obscureRepeatPassword));
+  }
+
+  void logOut() async {
+    await secureStorage.deleteAll();
+    emit(state.copyWith(status: Status.initial));
   }
 }

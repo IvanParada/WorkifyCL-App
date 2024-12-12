@@ -26,4 +26,84 @@ class AuthDatasource {
       return null;
     }
   }
+
+  Future<Map<String, dynamic>?> signUp(
+    String email,
+    String password,
+    String name,
+    int userPhone,
+  ) async {
+    try {
+      final response = await _dio.post<Map<String, dynamic>>(
+        '/auth/signup',
+        data: {
+          'email': email,
+          'password': password,
+          'name': name,
+          'userPhone': userPhone,
+        },
+      );
+
+      if (response.data != null) {
+        return response.data;
+      }
+
+      return null;
+    } catch (e) {
+      log(e.toString());
+      return null;
+    }
+  }
+
+  Future<bool> requestPasswordReset() async {
+    try {
+      final response = await _dio.post<Map<String, dynamic>>(
+        '/auth/request-reset-password',
+      );
+
+      if (response.statusCode == 200) {
+        return true;
+      }
+
+      return false;
+    } catch (e) {
+      log(e.toString());
+      return false;
+    }
+  }
+
+  Future<bool> resetPassword(int resetCode, String newPassword) async {
+    try {
+      final response = await _dio.post<Map<String, dynamic>>(
+        '/auth/reset-password',
+        data: {
+          'resetCode': resetCode,
+          'newPassword': newPassword,
+        },
+      );
+
+      if (response.statusCode == 200) {
+        return true;
+      }
+
+      return false;
+    } catch (e) {
+      log(e.toString());
+      return false;
+    }
+  }
+
+ Future<Map<String, dynamic>?> verifyEmail(String email, String code) async {
+    try {
+      final response = await _dio.post<Map<String, dynamic>>(
+        '/auth/verify-email',
+        data: {'email': email, 'code': code},
+      );
+
+      return response.data;
+    } catch (e) {
+      log(e.toString());
+      return null;
+    }
+  }
 }
