@@ -83,117 +83,130 @@ class SignUpScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   BlocBuilder<AuthenticationCubit, AuthenticationState>(
-                    builder: (contextCubit, stateCubit) {
-                      return FormBuilder(
-                        key: _formKey,
-                        child: Column(
-                          children: [
-                            const TextFieldWidget(
-                              name: 'name',
-                              labelText: 'Nombres y apellidos',
-                              keyboardType: TextInputType.name,
-                              validator: validateNamesAndSurnames,
-                            ),
-                            const SizedBox(height: 20),
-                            const TextFieldWidget(
-                              name: 'email',
-                              labelText: 'Correo electrónico',
-                              keyboardType: TextInputType.emailAddress,
-                              validator: validateEmail,
-                            ),
-                            const SizedBox(height: 20),
-                            TextFieldWidget(
-                              name: 'password',
-                              labelText: 'Contraseña',
-                              obscureText: stateCubit.obscurePassword,
-                              validator: validatePassword,
-                              keyboardType: TextInputType.visiblePassword,
-                              suffixIcon: GestureDetector(
-                                child: SvgPicture.asset(
-                                  stateCubit.obscurePassword == false
-                                      ? SvgAssets.eyeInvisibility
-                                      : SvgAssets.eyeVisibility,
-                                  fit: BoxFit.none,
-                                ),
-                                onTap: () {
-                                  contextCubit
-                                      .read<AuthenticationCubit>()
-                                      .showPassword();
-                                },
+                      builder: (contextCubit, stateCubit) {
+                    return FormBuilder(
+                      key: _formKey,
+                      child: Column(
+                        children: [
+                          const TextFieldWidget(
+                            name: 'name',
+                            labelText: 'Nombres y apellidos',
+                            keyboardType: TextInputType.name,
+                            validator: validateNamesAndSurnames,
+                          ),
+                          const SizedBox(height: 20),
+                          const TextFieldWidget(
+                            name: 'email',
+                            labelText: 'Correo electrónico',
+                            keyboardType: TextInputType.emailAddress,
+                            validator: validateEmail,
+                          ),
+                          const SizedBox(height: 20),
+                          TextFieldWidget(
+                            name: 'password',
+                            labelText: 'Contraseña',
+                            obscureText: stateCubit.obscurePassword,
+                            validator: validatePassword,
+                            keyboardType: TextInputType.visiblePassword,
+                            suffixIcon: GestureDetector(
+                              child: SvgPicture.asset(
+                                stateCubit.obscurePassword == false
+                                    ? SvgAssets.eyeInvisibility
+                                    : SvgAssets.eyeVisibility,
+                                fit: BoxFit.none,
                               ),
-                            ),
-                            const SizedBox(height: 20),
-                            TextFieldWidget(
-                              name: 'password-repeat',
-                              labelText: 'Repetir Contraseña',
-                              obscureText: stateCubit.obscureRepeatPassword,
-                              validator: validatePassword,
-                              keyboardType: TextInputType.visiblePassword,
-                              suffixIcon: GestureDetector(
-                                child: SvgPicture.asset(
-                                  stateCubit.obscureRepeatPassword == false
-                                      ? SvgAssets.eyeInvisibility
-                                      : SvgAssets.eyeVisibility,
-                                  fit: BoxFit.none,
-                                ),
-                                onTap: () {
-                                  contextCubit
-                                      .read<AuthenticationCubit>()
-                                      .showRepeatPassword();
-                                },
-                              ),
-                            ),
-                            const SizedBox(height: 20),
-                            const TextFieldWidget(
-                              name: 'phone',
-                              labelText: 'Celular',
-                              keyboardType: TextInputType.phone,
-                              validator: validateChileanPhoneNumber,
-                            ),
-                            const SizedBox(height: 40),
-                            GestureDetector(
                               onTap: () {
-                                final formState = _formKey.currentState;
-                                if (formState != null) {
-                                  if (formState.fields['password']!.value !=
-                                      formState
-                                          .fields['password-repeat']!.value) {
-                                    log('contraseñas deben ser iguales');
-                                  }
-                                  if (formState.saveAndValidate()) {
-                                    final name =
-                                        formState.fields['name']?.value;
-                                    final email =
-                                        formState.fields['email']?.value;
-                                    final password =
-                                        formState.fields['password']?.value;
-                                    final phone =
-                                        formState.fields['phone']?.value;
-                                    log('datos usuarios: (name: $name, email: $email, password: $password, phone: $phone)');
-                                    context.push('/verify-signup');
-                                  }
-                                }
+                                contextCubit
+                                    .read<AuthenticationCubit>()
+                                    .showPassword();
                               },
-                              child: Container(
-                                width: MediaQuery.of(context).size.width * 0.7,
-                                height: 40,
-                                decoration: BoxDecoration(
-                                    color: AppColors.primary,
-                                    borderRadius: BorderRadius.circular(20)),
-                                child: Center(
-                                  child: Text(
-                                    'Registrarse',
-                                    style: appTextTheme.bodyMedium!.copyWith(
-                                        color: AppColors.textSecondary),
-                                  ),
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                          TextFieldWidget(
+                            name: 'password-repeat',
+                            labelText: 'Repetir Contraseña',
+                            obscureText: stateCubit.obscureRepeatPassword,
+                            validator: validatePassword,
+                            keyboardType: TextInputType.visiblePassword,
+                            suffixIcon: GestureDetector(
+                              child: SvgPicture.asset(
+                                stateCubit.obscureRepeatPassword == false
+                                    ? SvgAssets.eyeInvisibility
+                                    : SvgAssets.eyeVisibility,
+                                fit: BoxFit.none,
+                              ),
+                              onTap: () {
+                                contextCubit
+                                    .read<AuthenticationCubit>()
+                                    .showRepeatPassword();
+                              },
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                          const TextFieldWidget(
+                            name: 'phone',
+                            labelText: 'Celular',
+                            keyboardType: TextInputType.number,
+                            validator: validateChileanPhoneNumber,
+                          ),
+                          const SizedBox(height: 40),
+                          GestureDetector(
+                            onTap: () {
+                              final formState = _formKey.currentState;
+                              if (formState != null) {
+                                if (formState.fields['password']!.value !=
+                                    formState
+                                        .fields['password-repeat']!.value) {
+                                  log('contraseñas deben ser iguales');
+                                }
+                                if (formState.saveAndValidate()) {
+                                  final name = formState.fields['name']?.value;
+                                  final email =
+                                      formState.fields['email']?.value;
+                                  final password =
+                                      formState.fields['password']?.value;
+                                  final phone = int.parse(
+                                      formState.fields['phone']?.value);
+
+                                  contextCubit
+                                      .read<AuthenticationCubit>()
+                                      .signUp(
+                                        name,
+                                        email,
+                                        password,
+                                        phone,
+                                      );
+
+                                  final isVerified =
+                                      stateCubit.signupUserData?.isVerified ??
+                                          false;
+
+                                  !isVerified
+                                      ? context.go('/signup-step-2')
+                                      : context.go('/signin');
+                                }
+                              }
+                            },
+                            child: Container(
+                              width: MediaQuery.of(context).size.width * 0.7,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                  color: AppColors.primary,
+                                  borderRadius: BorderRadius.circular(20)),
+                              child: Center(
+                                child: Text(
+                                  'Registrarse',
+                                  style: appTextTheme.bodyMedium!
+                                      .copyWith(color: AppColors.textSecondary),
                                 ),
                               ),
                             ),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
+                          ),
+                        ],
+                      ),
+                    );
+                  }),
                 ],
               ),
             ),

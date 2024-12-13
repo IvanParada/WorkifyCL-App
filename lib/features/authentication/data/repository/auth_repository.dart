@@ -26,16 +26,16 @@ class AuthRepository {
   }
 
   Future<SignUpResponseModel?> signUp(
+    String name,
     String email,
     String password,
-    String name,
     int userPhone,
   ) async {
     try {
       final response = await authDatasource.signUp(
+        name,
         email,
         password,
-        name,
         userPhone,
       );
 
@@ -67,17 +67,17 @@ class AuthRepository {
     }
   }
 
-  Future<String> verifyEmail(String email, String code) async {
+  Future<bool> verifyEmail(String email, String code) async {
     try {
       final response = await authDatasource.verifyEmail(email, code);
 
       if (response != null && response['message'] != null) {
-        return response['message'];
+        return true;
       }
-      return 'Error al verificar el correo.';
+      return false;
     } catch (e) {
       log(e.toString());
-      return 'Error al verificar el correo.';
+      return false;
     }
   }
 }

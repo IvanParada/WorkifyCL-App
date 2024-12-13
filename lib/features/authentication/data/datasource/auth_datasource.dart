@@ -28,18 +28,18 @@ class AuthDatasource {
   }
 
   Future<Map<String, dynamic>?> signUp(
+    String name,
     String email,
     String password,
-    String name,
     int userPhone,
   ) async {
     try {
       final response = await _dio.post<Map<String, dynamic>>(
         '/auth/signup',
         data: {
+          'name': name,
           'email': email,
           'password': password,
-          'name': name,
           'userPhone': userPhone,
         },
       );

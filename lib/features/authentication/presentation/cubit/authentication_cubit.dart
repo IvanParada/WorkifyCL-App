@@ -4,6 +4,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:jwt_decode/jwt_decode.dart';
 import 'package:workify_cl_app/core/enums/enums_state.dart';
 import 'package:workify_cl_app/features/authentication/data/models/login_response_model.dart';
+import 'package:workify_cl_app/features/authentication/data/models/signup_response_model.dart';
 import 'package:workify_cl_app/features/authentication/data/repository/auth_repository.dart';
 
 part 'authentication_state.dart';
@@ -27,7 +28,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
 
       emit(state.copyWith(
         loginUserData: res,
-        status: Status.success,
+        status: Status.successLogin,
       ));
       return;
     }
@@ -36,11 +37,20 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
   }
 
   Future<void> signUp(
-      String email, String password, String name, int userPhone) async {
+      String name, String email, String password, int userPhone) async {
     emit(state.copyWith(status: Status.loading));
 
-    final res = await authRepository.signUp(email, password, name, userPhone);
-    //TODO: ADD REPOSITORY
+    final res = await authRepository.signUp(name, email, password, userPhone);
+    if (res != null) {
+      emit(state.copyWith(
+        signupUserData: res,
+        status: Status.success,
+      ));
+      print('===> ${state.signupUserData!.verificationCode}');
+      return;
+    }
+
+    emit(state.copyWith(status: Status.failure));
   }
 
   Future<void> requestResetPassword() async {
@@ -59,9 +69,17 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
 
   Future<void> verifyEmail(email, code) async {
     emit(state.copyWith(status: Status.loading));
-    final res = authRepository.verifyEmail(email, code);
+    final res = await authRepository.verifyEmail(email, code);
+    if (res) {
+      emit(state.copyWith(
+        status: Status.successVerify,
+        verifyMessage: res,
+      ));
 
-    //TODO: ADD REPOSITORY
+      return;
+    }
+
+    emit(state.copyWith(status: Status.failure));
   }
 
   Future<bool> validateToken() async {
