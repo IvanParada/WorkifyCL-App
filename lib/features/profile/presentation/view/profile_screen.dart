@@ -23,8 +23,8 @@ class ProfileScreen extends StatelessWidget {
             decoration: const BoxDecoration(
                 color: AppColors.primary,
                 borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(30),
-                  bottomRight: Radius.circular(30),
+                  bottomLeft: Radius.circular(10),
+                  bottomRight: Radius.circular(10),
                 )),
             width: double.infinity,
             height: 140,
@@ -57,7 +57,7 @@ class ProfileScreen extends StatelessWidget {
               height: 80,
               width: 80,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(100),
+                  borderRadius: BorderRadius.circular(10),
                   color: AppColors.primary),
             ),
           ),
@@ -76,7 +76,7 @@ class ProfileScreen extends StatelessWidget {
               width: size.width * 0.6,
               decoration: BoxDecoration(
                 color: AppColors.error,
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(10),
               ),
               child: Center(
                 child: Text(

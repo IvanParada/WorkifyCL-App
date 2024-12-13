@@ -26,7 +26,7 @@ class CardJobWidget extends StatelessWidget {
         onTap: () {},
         child: Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(10),
             color: AppColors.textSecondary,
             boxShadow: [
               BoxShadow(
@@ -42,9 +42,15 @@ class CardJobWidget extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const CircleAvatar(
-                  backgroundColor: AppColors.primary,
-                  radius: 30,
+                Container(
+                  width: 70,
+                  height: 70,
+                  decoration: const BoxDecoration(
+                    color: AppColors.primary,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(10),
+                    ),
+                  ),
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -87,7 +93,7 @@ class CardJobWidget extends StatelessWidget {
                     Container(
                       decoration: BoxDecoration(
                         color: AppColors.success.withOpacity(.4),
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(10),
                       ),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(

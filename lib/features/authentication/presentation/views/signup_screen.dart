@@ -26,8 +26,8 @@ class SignUpScreen extends StatelessWidget {
               decoration: const BoxDecoration(
                   color: AppColors.primary,
                   borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(30),
-                    bottomRight: Radius.circular(30),
+                    bottomLeft: Radius.circular(10),
+                    bottomRight: Radius.circular(10),
                   )),
               width: double.infinity,
               height: 200.0,

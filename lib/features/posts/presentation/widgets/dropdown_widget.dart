@@ -8,7 +8,7 @@ class DropdownWidget extends StatelessWidget {
     required this.items,
     this.hintText,
     this.initialValue,
-    this.borderRadius = 20.0,
+    this.borderRadius = 10.0,
     this.itemHeight = 50.0,
     this.onChanged,
   });

@@ -25,8 +25,8 @@ class RecoveryStep2Screen extends StatelessWidget {
               decoration: const BoxDecoration(
                   color: AppColors.primary,
                   borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(30),
-                    bottomRight: Radius.circular(30),
+                    bottomLeft: Radius.circular(10),
+                    bottomRight: Radius.circular(10),
                   )),
               width: double.infinity,
               height: 200.0,
@@ -123,7 +123,7 @@ class RecoveryStep2Screen extends StatelessWidget {
                                 height: 40,
                                 decoration: BoxDecoration(
                                     color: AppColors.primary,
-                                    borderRadius: BorderRadius.circular(20)),
+                                    borderRadius: BorderRadius.circular(10)),
                                 child: Center(
                                   child: Text(
                                     'Verificar',

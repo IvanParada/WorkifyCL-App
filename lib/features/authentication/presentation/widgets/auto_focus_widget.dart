@@ -27,7 +27,7 @@ class AutoFocusTextField extends StatelessWidget {
         decoration: const InputDecoration(
           counterText: '',
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(20))
+            borderRadius: BorderRadius.all(Radius.circular(10))
           ),
         ),
         onChanged: (text) {

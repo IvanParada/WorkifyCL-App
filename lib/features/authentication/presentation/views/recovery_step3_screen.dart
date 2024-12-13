@@ -147,7 +147,7 @@ class RecoveryStep3Screen extends StatelessWidget {
                                 height: 40,
                                 decoration: BoxDecoration(
                                     color: AppColors.primary,
-                                    borderRadius: BorderRadius.circular(20)),
+                                    borderRadius: BorderRadius.circular(10)),
                                 child: Center(
                                   child: Text(
                                     'Cambiar',
