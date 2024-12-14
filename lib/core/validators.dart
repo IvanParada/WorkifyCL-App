@@ -43,11 +43,11 @@ String? validateChileanPhoneNumber(String? value) {
     return 'El número de teléfono es obligatorio';
   }
 
-  final phoneRegExp = RegExp(r'^(?:\+56\s?)?(?:9\s?)?\d{4}\s?\d{4}$');
+  // final phoneRegExp = RegExp(r'^(?:\+56\s?)?(?:9\s?)?\d{4}\s?\d{4}$');
 
-  if (!phoneRegExp.hasMatch(value.trim())) {
-    return 'Debe tener el formato +56 9 1234 5678';
-  }
+  // if (!phoneRegExp.hasMatch(value.trim())) {
+  //   return 'Debe tener el formato +56 9 1234 5678';
+  // }
 
   return null;
 }

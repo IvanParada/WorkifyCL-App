@@ -1,10 +1,20 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:go_router/go_router.dart';
 import 'package:jwt_decode/jwt_decode.dart';
 import 'package:workify_cl_app/core/enums/enums_state.dart';
+import 'package:workify_cl_app/core/themes/color_theme.dart';
+import 'package:workify_cl_app/core/themes/icon_theme.dart';
 import 'package:workify_cl_app/features/authentication/data/models/login_response_model.dart';
+import 'package:workify_cl_app/features/authentication/data/models/request_reset_password_model.dart';
+import 'package:workify_cl_app/features/authentication/data/models/signup_response_model.dart';
 import 'package:workify_cl_app/features/authentication/data/repository/auth_repository.dart';
+import 'package:workify_cl_app/features/authentication/presentation/widgets/dialog_widget.dart';
 
 part 'authentication_state.dart';
 
@@ -15,7 +25,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
   final AuthRepository authRepository;
   final FlutterSecureStorage secureStorage;
 
-  void logIn(String email, String password) async {
+  Future<void> logIn(String email, String password) async {
     emit(state.copyWith(status: Status.loading));
     final res = await authRepository.loginUser(email, password);
 
@@ -27,7 +37,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
 
       emit(state.copyWith(
         loginUserData: res,
-        status: Status.success,
+        status: Status.successLogin,
       ));
       return;
     }
@@ -35,17 +45,124 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     emit(state.copyWith(status: Status.failure));
   }
 
-  void showPassword() {
-    emit(state.copyWith(obscurePassword: !state.obscurePassword));
+  Future<void> signUp(
+      String name, String email, String password, int userPhone) async {
+    emit(state.copyWith(status: Status.loading));
+
+    final res = await authRepository.signUp(name, email, password, userPhone);
+    if (res != null) {
+      emit(state.copyWith(
+        signupUserData: res,
+        status: Status.success,
+      ));
+      log('===> CODIGO REGISTRO: ${state.signupUserData!.verificationCode}');
+      return;
+    }
+
+    emit(state.copyWith(status: Status.failure));
   }
 
-  void showRepeatPassword() {
-    emit(state.copyWith(obscureRepeatPassword: !state.obscureRepeatPassword));
+  Future<void> requestResetPassword(email, context) async {
+    emit(state.copyWith(status: Status.loading));
+    setEmailResetPass(email);
+    final res = await authRepository.requestResetPassword(email);
+
+    if (res != null) {
+      emit(state.copyWith(codeRequestResetPass: res));
+
+      showDialog<void>(
+          context: context,
+          barrierColor: Colors.black54,
+          builder: (context) {
+            return DialogWidget(
+              title: '¡Correo enviado!',
+              message: 'Verifica tu banedeja de entrada e ingresa el código.',
+              colorTypeDialog: AppColors.info,
+              icon: SvgAssets.logoApp,
+              onTap: () {
+                context.pop();
+                context.push('/recovery-step-2');
+              },
+            );
+          });
+      return;
+    }
+    showDialog<void>(
+        context: context,
+        barrierColor: Colors.black54,
+        builder: (context) {
+          return DialogWidget(
+            title: '¡Ups!',
+            message: 'Ha ocurrido un problema al enviar el correo.',
+            colorTypeDialog: AppColors.warning,
+            icon: SvgAssets.logoApp,
+            onTap: () {
+              context.pop();
+            },
+          );
+        });
   }
 
-  void logOut() async {
-    await secureStorage.deleteAll();
-    emit(state.copyWith(status: Status.initial));
+  Future<void> resetPassword(String newPassword, context) async {
+    emit(state.copyWith(status: Status.loading));
+    final code = int.parse(state.setCodeResetPass!);
+    final res = await authRepository.resetPassword(code, newPassword);
+
+    if (res) {
+      showDialog<void>(
+          context: context,
+          barrierColor: Colors.black54,
+          builder: (context) {
+            return DialogWidget(
+              title: '¡Bienvenido nuevamente!',
+              message: 'Tu contraseña ha sido actualizada exitosamente.',
+              colorTypeDialog: AppColors.success,
+              icon: SvgAssets.logoApp,
+              onTap: () {
+                context.pop();
+                context.go('/signin');
+              },
+            );
+          });
+    }
+  }
+
+  void setCodeResetPass(String code) {
+    emit(state.copyWith(setCodeResetPass: code));
+  }
+
+  void setEmailResetPass(String email) {
+    emit(state.copyWith(setEmailResetPass: email));
+  }
+
+  Future<void> verifyEmail(email, code, context) async {
+    emit(state.copyWith(status: Status.loading));
+    final res = await authRepository.verifyEmail(email, code);
+    if (res) {
+      emit(state.copyWith(
+        status: Status.successVerify,
+        verifyMessage: res,
+      ));
+
+      if (state.status == Status.successVerify || state.verifyMessage!) {
+        showDialog<void>(
+            context: context,
+            barrierColor: Colors.black54,
+            builder: (context) {
+              return DialogWidget(
+                title: '¡Bienvenido!',
+                message: 'Has sido registrado exitosamente.',
+                onTap: () {
+                  context.pop();
+                  context.go('/signin');
+                },
+              );
+            });
+      }
+      return;
+    }
+
+    emit(state.copyWith(status: Status.failure));
   }
 
   Future<bool> validateToken() async {
@@ -84,5 +201,18 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
 
       return false;
     }
+  }
+
+  void showPassword() {
+    emit(state.copyWith(obscurePassword: !state.obscurePassword));
+  }
+
+  void showRepeatPassword() {
+    emit(state.copyWith(obscureRepeatPassword: !state.obscureRepeatPassword));
+  }
+
+  void logOut() async {
+    await secureStorage.deleteAll();
+    emit(state.copyWith(status: Status.initial));
   }
 }

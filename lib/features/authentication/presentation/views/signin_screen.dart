@@ -71,7 +71,7 @@ class SignInScreen extends StatelessWidget {
                   const SizedBox(height: 20),
                   BlocListener<AuthenticationCubit, AuthenticationState>(
                     listener: (context, state) {
-                      if (state.status == Status.success) {
+                      if (state.status == Status.successLogin) {
                         context.go('/home');
                       } else if (state.status == Status.failure) {
                         ScaffoldMessenger.of(context).showSnackBar(

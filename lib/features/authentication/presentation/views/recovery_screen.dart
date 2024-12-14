@@ -104,8 +104,8 @@ class RecoveryScreen extends StatelessWidget {
                                     formState.saveAndValidate()) {
                                   final email =
                                       formState.fields['email']?.value;
-                                  log('email recovery $email');
-                                  context.push('/recovery-step-2');
+                                  
+                                  context.read<AuthenticationCubit>().requestResetPassword(email, context);
                                 }
                               },
                               child: Container(

@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
+import 'package:workify_cl_app/features/authentication/presentation/views/signup_step2_screen.dart';
 import 'package:workify_cl_app/features/home/presentation/views/home_screen.dart';
 import 'package:workify_cl_app/features/authentication/presentation/views/signin_screen.dart';
 import 'package:workify_cl_app/features/authentication/presentation/views/signup_screen.dart';
@@ -27,6 +28,10 @@ final GoRouter _router = GoRouter(
     GoRoute(
       path: '/signup',
       builder: (context, state) => SignUpScreen(),
+    ),
+    GoRoute(
+      path: '/signup-step-2',
+      builder: (context, state) => SignUpVerifyScreen(),
     ),
     GoRoute(
       path: '/recovery',

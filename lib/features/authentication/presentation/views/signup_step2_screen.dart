@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -114,8 +112,19 @@ class SignUpVerifyScreen extends StatelessWidget {
                                     controllers.map((c) => c.text).join();
 
                                 if (formState != null && code.length == 6) {
-                                  log('código de verificacion: $code');
-                                  context.push('/');
+                                  if (stateCubit.signupUserData != null) {
+                                    if (stateCubit
+                                            .signupUserData!.verificationCode ==
+                                        code) {
+                                      contextCubit
+                                          .read<AuthenticationCubit>()
+                                          .verifyEmail(
+                                              stateCubit.signupUserData!.email,
+                                              stateCubit.signupUserData!
+                                                  .verificationCode,
+                                              context);
+                                    }
+                                  }
                                 }
                               },
                               child: Container(
