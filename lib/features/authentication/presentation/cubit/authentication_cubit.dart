@@ -1,11 +1,16 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:go_router/go_router.dart';
 import 'package:jwt_decode/jwt_decode.dart';
 import 'package:workify_cl_app/core/enums/enums_state.dart';
 import 'package:workify_cl_app/features/authentication/data/models/login_response_model.dart';
 import 'package:workify_cl_app/features/authentication/data/models/signup_response_model.dart';
 import 'package:workify_cl_app/features/authentication/data/repository/auth_repository.dart';
+import 'package:workify_cl_app/features/authentication/presentation/widgets/dialog_widget.dart';
 
 part 'authentication_state.dart';
 
@@ -46,7 +51,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
         signupUserData: res,
         status: Status.success,
       ));
-      print('===> ${state.signupUserData!.verificationCode}');
+      log('===> CODIGO REGISTRO: ${state.signupUserData!.verificationCode}');
       return;
     }
 
@@ -67,7 +72,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     //TODO: ADD REPOSITORY
   }
 
-  Future<void> verifyEmail(email, code) async {
+  Future<void> verifyEmail(email, code, context) async {
     emit(state.copyWith(status: Status.loading));
     final res = await authRepository.verifyEmail(email, code);
     if (res) {
@@ -76,6 +81,21 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
         verifyMessage: res,
       ));
 
+      if (state.status == Status.successVerify || state.verifyMessage!) {
+        showDialog<void>(
+            context: context,
+            barrierColor: Colors.black54,
+            builder: (context) {
+              return DialogWidget(
+                title: '¡Bienvenido!',
+                message: 'Has sido registrado exitosamente.',
+                onTap: () {
+                  context.pop();
+                  context.go('/signin');
+                },
+              );
+            });
+      }
       return;
     }
 

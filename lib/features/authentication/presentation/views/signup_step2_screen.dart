@@ -1,11 +1,8 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:go_router/go_router.dart';
-import 'package:workify_cl_app/core/enums/enums_state.dart';
 import 'package:workify_cl_app/core/themes/color_theme.dart';
 import 'package:workify_cl_app/core/themes/icon_theme.dart';
 import 'package:workify_cl_app/core/themes/texts_theme.dart';
@@ -122,40 +119,10 @@ class SignUpVerifyScreen extends StatelessWidget {
                                       contextCubit
                                           .read<AuthenticationCubit>()
                                           .verifyEmail(
-                                            stateCubit.signupUserData!.email,
-                                            stateCubit.signupUserData!
-                                                .verificationCode,
-                                          );
-                                      if (stateCubit.status ==
-                                              Status.successVerify ||
-                                          stateCubit.verifyMessage!)
-                                        showDialog<void>(
-                                            context: context,
-                                            builder: (context) {
-                                              return SizedBox(
-                                                height: 200,
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    0.9,
-                                                child: Column(
-                                                  children: [
-                                                    const Text(
-                                                        'Has sido registrado exitosamente'),
-                                                    GestureDetector(
-                                                      onTap: () => context
-                                                          .push('/signin'),
-                                                      child: Container(
-                                                        color:
-                                                            AppColors.success,
-                                                        width: 100,
-                                                        height: 40,
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
-                                              );
-                                            });
+                                              stateCubit.signupUserData!.email,
+                                              stateCubit.signupUserData!
+                                                  .verificationCode,
+                                              context);
                                     }
                                   }
                                 }
