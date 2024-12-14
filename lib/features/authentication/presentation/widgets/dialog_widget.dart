@@ -27,7 +27,7 @@ class DialogWidget extends StatelessWidget {
     final appTextTheme = Theme.of(context).textTheme;
     return Center(
       child: Container(
-        height: MediaQuery.of(context).size.height * 0.35,
+        height: MediaQuery.of(context).size.height * 0.37,
         width: MediaQuery.of(context).size.width * 0.9,
         decoration: const BoxDecoration(
           color: AppColors.background,
@@ -70,9 +70,12 @@ class DialogWidget extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              Text(
-                message,
-                style: appTextTheme.bodyMedium,
+              Padding(
+                padding: const EdgeInsets.only(left: 20, right: 20),
+                child: Text(
+                  message,
+                  style: appTextTheme.bodyMedium,
+                ),
               ),
               const SizedBox(
                 height: 30,

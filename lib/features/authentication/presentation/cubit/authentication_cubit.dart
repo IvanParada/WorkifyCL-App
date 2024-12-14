@@ -3,11 +3,15 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jwt_decode/jwt_decode.dart';
 import 'package:workify_cl_app/core/enums/enums_state.dart';
+import 'package:workify_cl_app/core/themes/color_theme.dart';
+import 'package:workify_cl_app/core/themes/icon_theme.dart';
 import 'package:workify_cl_app/features/authentication/data/models/login_response_model.dart';
+import 'package:workify_cl_app/features/authentication/data/models/request_reset_password_model.dart';
 import 'package:workify_cl_app/features/authentication/data/models/signup_response_model.dart';
 import 'package:workify_cl_app/features/authentication/data/repository/auth_repository.dart';
 import 'package:workify_cl_app/features/authentication/presentation/widgets/dialog_widget.dart';
@@ -58,18 +62,77 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     emit(state.copyWith(status: Status.failure));
   }
 
-  Future<void> requestResetPassword() async {
+  Future<void> requestResetPassword(email, context) async {
     emit(state.copyWith(status: Status.loading));
+    setEmailResetPass(email);
+    final res = await authRepository.requestResetPassword(email);
 
-    await authRepository.requestResetPassword();
-    //TODO: ADD SHOWDIALOG
+    if (res != null) {
+      emit(state.copyWith(codeRequestResetPass: res));
+
+      showDialog<void>(
+          context: context,
+          barrierColor: Colors.black54,
+          builder: (context) {
+            return DialogWidget(
+              title: '¡Correo enviado!',
+              message: 'Verifica tu banedeja de entrada e ingresa el código.',
+              colorTypeDialog: AppColors.info,
+              icon: SvgAssets.logoApp,
+              onTap: () {
+                context.pop();
+                context.push('/recovery-step-2');
+              },
+            );
+          });
+      return;
+    }
+    showDialog<void>(
+        context: context,
+        barrierColor: Colors.black54,
+        builder: (context) {
+          return DialogWidget(
+            title: '¡Ups!',
+            message: 'Ha ocurrido un problema al enviar el correo.',
+            colorTypeDialog: AppColors.warning,
+            icon: SvgAssets.logoApp,
+            onTap: () {
+              context.pop();
+            },
+          );
+        });
   }
 
-  Future<void> resetPassword(int resetCode, String newPassword) async {
+  Future<void> resetPassword(String newPassword, context) async {
     emit(state.copyWith(status: Status.loading));
+    final code = int.parse(state.setCodeResetPass!);
+    final res = await authRepository.resetPassword(code, newPassword);
 
-    await authRepository.resetPassword(resetCode, newPassword);
-    //TODO: ADD REPOSITORY
+    if (res) {
+      showDialog<void>(
+          context: context,
+          barrierColor: Colors.black54,
+          builder: (context) {
+            return DialogWidget(
+              title: '¡Bienvenido nuevamente!',
+              message: 'Tu contraseña ha sido actualizada exitosamente.',
+              colorTypeDialog: AppColors.success,
+              icon: SvgAssets.logoApp,
+              onTap: () {
+                context.pop();
+                context.go('/signin');
+              },
+            );
+          });
+    }
+  }
+
+  void setCodeResetPass(String code) {
+    emit(state.copyWith(setCodeResetPass: code));
+  }
+
+  void setEmailResetPass(String email) {
+    emit(state.copyWith(setEmailResetPass: email));
   }
 
   Future<void> verifyEmail(email, code, context) async {

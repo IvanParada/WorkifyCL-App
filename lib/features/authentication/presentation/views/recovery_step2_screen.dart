@@ -10,6 +10,7 @@ import 'package:workify_cl_app/core/themes/icon_theme.dart';
 import 'package:workify_cl_app/core/themes/texts_theme.dart';
 import 'package:workify_cl_app/features/authentication/presentation/cubit/authentication_cubit.dart';
 import 'package:workify_cl_app/features/authentication/presentation/widgets/auto_focus_widget.dart';
+import 'package:workify_cl_app/features/authentication/presentation/widgets/dialog_widget.dart';
 
 class RecoveryStep2Screen extends StatelessWidget {
   RecoveryStep2Screen({super.key});
@@ -114,9 +115,33 @@ class RecoveryStep2Screen extends StatelessWidget {
                                     controllers.map((c) => c.text).join();
 
                                 if (formState != null && code.length == 6) {
-                                  log('código de verificacion: $code');
-                                  context.push('/recovery-step-3');
+                                  if (stateCubit.codeRequestResetPass != null) {
+                                    if (stateCubit.codeRequestResetPass!.code ==
+                                        code) {
+                                      contextCubit
+                                          .read<AuthenticationCubit>()
+                                          .setCodeResetPass(code);
+                                      context.push('/recovery-step-3');
+                                      return;
+                                    }
+                                  }
+                                  showDialog<void>(
+                                      context: context,
+                                      barrierColor: Colors.black54,
+                                      builder: (context) {
+                                        return DialogWidget(
+                                          title: '¡Ups!',
+                                          message:
+                                              'Verifica que el correo que hayas ingresado sea correcto.',
+                                          colorTypeDialog: AppColors.warning,
+                                          icon: SvgAssets.logoApp,
+                                          onTap: () {
+                                            context.pop();
+                                          },
+                                        );
+                                      });
                                 }
+                                return;
                               },
                               child: Container(
                                 width: MediaQuery.of(context).size.width * 0.7,

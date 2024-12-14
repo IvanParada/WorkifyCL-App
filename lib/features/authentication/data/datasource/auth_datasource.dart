@@ -55,20 +55,23 @@ class AuthDatasource {
     }
   }
 
-  Future<bool> requestPasswordReset() async {
+  Future<Map<String, dynamic>?> requestPasswordReset(email) async {
     try {
       final response = await _dio.post<Map<String, dynamic>>(
         '/auth/request-reset-password',
+        data: {
+          'email': email,
+        }
       );
 
-      if (response.statusCode == 200) {
-        return true;
+      if (response.data != null) {
+        return response.data;
       }
 
-      return false;
+      return null;
     } catch (e) {
       log(e.toString());
-      return false;
+      return null;
     }
   }
 

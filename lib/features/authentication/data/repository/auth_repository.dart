@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:workify_cl_app/features/authentication/data/datasource/auth_datasource.dart';
 import 'package:workify_cl_app/features/authentication/data/models/login_response_model.dart';
+import 'package:workify_cl_app/features/authentication/data/models/request_reset_password_model.dart';
 import 'package:workify_cl_app/features/authentication/data/models/signup_response_model.dart';
 
 class AuthRepository {
@@ -49,12 +50,17 @@ class AuthRepository {
     }
   }
 
-  Future<bool> requestResetPassword() async {
+  Future<RequestResetPasswordModel?> requestResetPassword(email) async {
     try {
-      return await authDatasource.requestPasswordReset();
+      final res = await authDatasource.requestPasswordReset(email);
+
+      if (res != null) {
+        return RequestResetPasswordModel.fromJson(res);
+      }
+      return null;
     } catch (e) {
       log(e.toString());
-      return false;
+      return null;
     }
   }
 

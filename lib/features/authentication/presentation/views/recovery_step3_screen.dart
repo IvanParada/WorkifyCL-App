@@ -8,6 +8,7 @@ import 'package:workify_cl_app/core/themes/icon_theme.dart';
 import 'package:workify_cl_app/core/themes/texts_theme.dart';
 import 'package:workify_cl_app/core/validators.dart';
 import 'package:workify_cl_app/features/authentication/presentation/cubit/authentication_cubit.dart';
+import 'package:workify_cl_app/features/authentication/presentation/widgets/dialog_widget.dart';
 import 'package:workify_cl_app/features/authentication/presentation/widgets/text_field_widget.dart';
 
 class RecoveryStep3Screen extends StatelessWidget {
@@ -133,14 +134,33 @@ class RecoveryStep3Screen extends StatelessWidget {
                                 final formState = _formKey.currentState;
                                 if (formState != null &&
                                     formState.saveAndValidate()) {
-                                  final email =
-                                      formState.fields['email']?.value;
                                   final password =
                                       formState.fields['password']?.value;
-                                  context
-                                      .read<AuthenticationCubit>()
-                                      .logIn(email, password);
+                                  final passwordRepeat = formState
+                                      .fields['password-repeat']?.value;
+                                  if (password == passwordRepeat) {
+                                    context
+                                        .read<AuthenticationCubit>()
+                                        .resetPassword(password, context);
+                                    return;
+                                  }
+                                   showDialog<void>(
+                                      context: context,
+                                      barrierColor: Colors.black54,
+                                      builder: (context) {
+                                        return DialogWidget(
+                                          title: '¡Ups!',
+                                          message:
+                                              'Verifica que las contraseñas coincidan.',
+                                          colorTypeDialog: AppColors.info,
+                                          icon: SvgAssets.logoApp,
+                                          onTap: () {
+                                            context.pop();
+                                          },
+                                        );
+                                      });
                                 }
+                                return;
                               },
                               child: Container(
                                 width: MediaQuery.of(context).size.width * 0.7,
