@@ -5,6 +5,7 @@ import 'package:Workify/core/themes/icon_theme.dart';
 import 'package:Workify/core/themes/texts_theme.dart';
 import 'package:Workify/core/validators.dart';
 import 'package:Workify/features/authentication/presentation/cubit/authentication_cubit.dart';
+import 'package:Workify/features/authentication/presentation/widgets/dialog_widget.dart';
 import 'package:Workify/features/authentication/presentation/widgets/text_field_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
