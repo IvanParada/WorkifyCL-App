@@ -7,7 +7,7 @@ import 'package:workify_cl_app/features/posts/data/repository/post_repository.da
 part 'post_state.dart';
 
 class PostCubit extends Cubit<PostState> {
-  PostCubit({required this.postRepository}) : super(PostState());
+  PostCubit({required this.postRepository}) : super(const PostState());
 
   final PostRepository postRepository;
 

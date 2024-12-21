@@ -17,7 +17,7 @@ class AddPostScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final _formKey = GlobalKey<FormBuilderState>();
+    final formKey = GlobalKey<FormBuilderState>();
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -58,7 +58,7 @@ class AddPostScreen extends StatelessWidget {
           BlocBuilder<PostCubit, PostState>(
             builder: (contextCubit, stateCubit) {
               return FormBuilder(
-                key: _formKey,
+                key: formKey,
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: size.width * .05),
                   child: SizedBox(
@@ -138,7 +138,7 @@ class AddPostScreen extends StatelessWidget {
                           Center(
                             child: GestureDetector(
                               onTap: () {
-                                final formState = _formKey.currentState;
+                                final formState = formKey.currentState;
                                 if (formState != null) {
                                   formState.reset();
                                   context.read<PostCubit>().resetSelections();
