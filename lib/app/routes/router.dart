@@ -1,16 +1,17 @@
+import 'package:Workify/features/authentication/presentation/views/recovery_screen.dart';
+import 'package:Workify/features/authentication/presentation/views/recovery_step2_screen.dart';
+import 'package:Workify/features/authentication/presentation/views/recovery_step3_screen.dart';
+import 'package:Workify/features/authentication/presentation/views/signin_screen.dart';
+import 'package:Workify/features/authentication/presentation/views/signup_screen.dart';
+import 'package:Workify/features/authentication/presentation/views/signup_step2_screen.dart';
+import 'package:Workify/features/home/presentation/views/home_screen.dart';
+import 'package:Workify/features/home/presentation/views/splash_screen.dart';
+import 'package:Workify/features/main_screen.dart';
+import 'package:Workify/features/posts/presentation/views/add_post_screen.dart';
+import 'package:Workify/features/profile/presentation/view/profile_screen.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
-import 'package:workify_cl_app/features/authentication/presentation/views/signup_step2_screen.dart';
-import 'package:workify_cl_app/features/home/presentation/views/home_screen.dart';
-import 'package:workify_cl_app/features/authentication/presentation/views/signin_screen.dart';
-import 'package:workify_cl_app/features/authentication/presentation/views/signup_screen.dart';
-import 'package:workify_cl_app/features/authentication/presentation/views/recovery_screen.dart';
-import 'package:workify_cl_app/features/authentication/presentation/views/recovery_step2_screen.dart';
-import 'package:workify_cl_app/features/authentication/presentation/views/recovery_step3_screen.dart';
-import 'package:workify_cl_app/features/home/presentation/views/splash_screen.dart';
-import 'package:workify_cl_app/features/main_screen.dart';
-import 'package:workify_cl_app/features/profile/presentation/view/profile_screen.dart';
-import 'package:workify_cl_app/features/posts/presentation/views/add_post_screen.dart';
+
 
 final GlobalKey<NavigatorState> _shellNavigatorKey = GlobalKey<NavigatorState>();
 

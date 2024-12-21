@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.workify_cl_app"
+    namespace = "com.example.Workify"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -20,7 +20,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.example.workify_cl_app"
+        applicationId = "com.example.Workify"
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode

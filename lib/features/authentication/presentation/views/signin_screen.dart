@@ -1,23 +1,23 @@
 
+import 'package:Workify/core/enums/enums_state.dart';
+import 'package:Workify/core/themes/color_theme.dart';
+import 'package:Workify/core/themes/icon_theme.dart';
+import 'package:Workify/core/themes/texts_theme.dart';
+import 'package:Workify/core/validators.dart';
+import 'package:Workify/features/authentication/presentation/cubit/authentication_cubit.dart';
+import 'package:Workify/features/authentication/presentation/widgets/text_field_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:go_router/go_router.dart';
-import 'package:workify_cl_app/core/enums/enums_state.dart';
-import 'package:workify_cl_app/core/themes/color_theme.dart';
-import 'package:workify_cl_app/core/themes/icon_theme.dart';
-import 'package:workify_cl_app/core/themes/texts_theme.dart';
-import 'package:workify_cl_app/core/validators.dart';
-import 'package:workify_cl_app/features/authentication/presentation/cubit/authentication_cubit.dart';
-import 'package:workify_cl_app/features/authentication/presentation/widgets/text_field_widget.dart';
+
 
 class SignInScreen extends StatelessWidget {
   SignInScreen({super.key});
   final _formKey = GlobalKey<FormBuilderState>();
   @override
   Widget build(BuildContext context) {
-    final authCubit = BlocProvider.of<AuthenticationCubit>(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(

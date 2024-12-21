@@ -1,6 +1,6 @@
 {
-    "name": "workify_cl_app",
-    "short_name": "workify_cl_app",
+    "name": "Workify",
+    "short_name": "Workify",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

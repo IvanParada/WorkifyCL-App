@@ -1,15 +1,14 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:go_router/go_router.dart';
-import 'package:workify_cl_app/core/themes/color_theme.dart';
-import 'package:workify_cl_app/core/themes/icon_theme.dart';
-import 'package:workify_cl_app/core/themes/texts_theme.dart';
-import 'package:workify_cl_app/features/authentication/presentation/cubit/authentication_cubit.dart';
-import 'package:workify_cl_app/features/authentication/presentation/widgets/auto_focus_widget.dart';
-import 'package:workify_cl_app/features/authentication/presentation/widgets/dialog_widget.dart';
+import 'package:Workify/core/themes/color_theme.dart';
+import 'package:Workify/core/themes/icon_theme.dart';
+import 'package:Workify/core/themes/texts_theme.dart';
+import 'package:Workify/features/authentication/presentation/cubit/authentication_cubit.dart';
+import 'package:Workify/features/authentication/presentation/widgets/auto_focus_widget.dart';
+import 'package:Workify/features/authentication/presentation/widgets/dialog_widget.dart';
 
 class RecoveryStep2Screen extends StatelessWidget {
   RecoveryStep2Screen({super.key});
@@ -38,7 +37,10 @@ class RecoveryStep2Screen extends StatelessWidget {
                     child: SvgPicture.asset(
                       SvgAssets.logoApp,
                       height: 80,
-                      color: AppColors.textSecondary.withOpacity(0.1),
+                      colorFilter: ColorFilter.mode(
+                        AppColors.textSecondary.withOpacity(0.1),
+                        BlendMode.srcIn,
+                      ),
                     ),
                   ),
                   Padding(
@@ -48,8 +50,12 @@ class RecoveryStep2Screen extends StatelessWidget {
                         GestureDetector(
                           onTap: () => context.pop(),
                           child: SvgPicture.asset(
-                            SvgAssets.arrowLeft,
-                            color: AppColors.textSecondary,
+                            SvgAssets.logoApp,
+                            height: 80,
+                            colorFilter: const ColorFilter.mode(
+                              AppColors.textSecondary,
+                              BlendMode.srcIn,
+                            ),
                           ),
                         ),
                         const SizedBox(

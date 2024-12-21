@@ -1,9 +1,10 @@
 import 'dart:developer';
 
-import 'package:workify_cl_app/features/authentication/data/datasource/auth_datasource.dart';
-import 'package:workify_cl_app/features/authentication/data/models/login_response_model.dart';
-import 'package:workify_cl_app/features/authentication/data/models/request_reset_password_model.dart';
-import 'package:workify_cl_app/features/authentication/data/models/signup_response_model.dart';
+import 'package:Workify/features/authentication/data/datasource/auth_datasource.dart';
+import 'package:Workify/features/authentication/data/models/login_response_model.dart';
+import 'package:Workify/features/authentication/data/models/request_reset_password_model.dart';
+import 'package:Workify/features/authentication/data/models/signup_response_model.dart';
+
 
 class AuthRepository {
   AuthRepository({

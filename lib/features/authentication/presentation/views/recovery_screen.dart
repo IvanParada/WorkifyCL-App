@@ -1,15 +1,14 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:go_router/go_router.dart';
-import 'package:workify_cl_app/core/themes/color_theme.dart';
-import 'package:workify_cl_app/core/themes/icon_theme.dart';
-import 'package:workify_cl_app/core/themes/texts_theme.dart';
-import 'package:workify_cl_app/core/validators.dart';
-import 'package:workify_cl_app/features/authentication/presentation/cubit/authentication_cubit.dart';
-import 'package:workify_cl_app/features/authentication/presentation/widgets/text_field_widget.dart';
+import 'package:Workify/core/themes/color_theme.dart';
+import 'package:Workify/core/themes/icon_theme.dart';
+import 'package:Workify/core/themes/texts_theme.dart';
+import 'package:Workify/core/validators.dart';
+import 'package:Workify/features/authentication/presentation/cubit/authentication_cubit.dart';
+import 'package:Workify/features/authentication/presentation/widgets/text_field_widget.dart';
 
 class RecoveryScreen extends StatelessWidget {
   RecoveryScreen({super.key});
@@ -38,7 +37,10 @@ class RecoveryScreen extends StatelessWidget {
                     child: SvgPicture.asset(
                       SvgAssets.logoApp,
                       height: 80,
-                      color: AppColors.textSecondary.withOpacity(0.1),
+                      colorFilter: ColorFilter.mode(
+                        AppColors.textSecondary.withOpacity(0.1),
+                        BlendMode.srcIn,
+                      ),
                     ),
                   ),
                   Padding(
@@ -49,7 +51,10 @@ class RecoveryScreen extends StatelessWidget {
                           onTap: () => context.pop(),
                           child: SvgPicture.asset(
                             SvgAssets.arrowLeft,
-                            color: AppColors.textSecondary,
+                            colorFilter: const ColorFilter.mode(
+                              AppColors.textSecondary,
+                              BlendMode.srcIn,
+                            ),
                           ),
                         ),
                         const SizedBox(
@@ -103,8 +108,10 @@ class RecoveryScreen extends StatelessWidget {
                                     formState.saveAndValidate()) {
                                   final email =
                                       formState.fields['email']?.value;
-                                  
-                                  context.read<AuthenticationCubit>().requestResetPassword(email, context);
+
+                                  context
+                                      .read<AuthenticationCubit>()
+                                      .requestResetPassword(email, context);
                                 }
                               },
                               child: Container(

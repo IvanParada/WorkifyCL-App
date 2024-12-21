@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:workify_cl_app/core/themes/color_theme.dart';
-import 'package:workify_cl_app/core/themes/icon_theme.dart';
+import 'package:Workify/core/themes/color_theme.dart';
+import 'package:Workify/core/themes/icon_theme.dart';
 
 class DialogWidget extends StatelessWidget {
   const DialogWidget({

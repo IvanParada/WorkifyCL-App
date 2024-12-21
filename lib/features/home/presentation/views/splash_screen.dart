@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:workify_cl_app/features/authentication/presentation/cubit/authentication_cubit.dart';
-import 'package:workify_cl_app/features/posts/presentation/cubit/post_cubit.dart';
+import 'package:Workify/features/authentication/presentation/cubit/authentication_cubit.dart';
+import 'package:Workify/features/posts/presentation/cubit/post_cubit.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});

@@ -1,9 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:workify_cl_app/core/themes/color_theme.dart';
-import 'package:workify_cl_app/core/themes/icon_theme.dart';
-import 'package:workify_cl_app/core/themes/texts_theme.dart';
+import 'package:Workify/core/themes/color_theme.dart';
+import 'package:Workify/core/themes/icon_theme.dart';
+import 'package:Workify/core/themes/texts_theme.dart';
 
 class CardJobWidget extends StatelessWidget {
   const CardJobWidget({

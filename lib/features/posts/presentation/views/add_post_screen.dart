@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:workify_cl_app/core/themes/color_theme.dart';
-import 'package:workify_cl_app/core/themes/icon_theme.dart';
-import 'package:workify_cl_app/core/themes/texts_theme.dart';
-import 'package:workify_cl_app/core/validators.dart';
-import 'package:workify_cl_app/features/authentication/presentation/widgets/text_field_widget.dart';
-import 'package:workify_cl_app/features/posts/presentation/cubit/post_cubit.dart';
-import 'package:workify_cl_app/features/posts/presentation/widgets/chip_selector_widget.dart';
-import 'package:workify_cl_app/features/posts/presentation/widgets/dropdown_widget.dart';
+import 'package:Workify/core/themes/color_theme.dart';
+import 'package:Workify/core/themes/icon_theme.dart';
+import 'package:Workify/core/themes/texts_theme.dart';
+import 'package:Workify/core/validators.dart';
+import 'package:Workify/features/authentication/presentation/widgets/text_field_widget.dart';
+import 'package:Workify/features/posts/presentation/cubit/post_cubit.dart';
+import 'package:Workify/features/posts/presentation/widgets/chip_selector_widget.dart';
+import 'package:Workify/features/posts/presentation/widgets/dropdown_widget.dart';
 
 class AddPostScreen extends StatelessWidget {
   const AddPostScreen({super.key});

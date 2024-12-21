@@ -1,4 +1,4 @@
-package com.example.workify_cl_app
+package com.example.Workify
 
 import io.flutter.embedding.android.FlutterActivity
 

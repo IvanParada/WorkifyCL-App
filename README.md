@@ -1,4 +1,4 @@
-# workify_cl_app
+# Workify
 
 A new Flutter project.
 

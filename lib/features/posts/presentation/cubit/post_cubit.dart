@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:workify_cl_app/core/enums/enums_state.dart';
-import 'package:workify_cl_app/features/posts/data/models/locations_model.dart';
-import 'package:workify_cl_app/features/posts/data/repository/post_repository.dart';
+import 'package:Workify/core/enums/enums_state.dart';
+import 'package:Workify/features/posts/data/models/locations_model.dart';
+import 'package:Workify/features/posts/data/repository/post_repository.dart';
 
 part 'post_state.dart';
 

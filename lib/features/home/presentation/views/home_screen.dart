@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:workify_cl_app/core/themes/color_theme.dart';
-import 'package:workify_cl_app/features/home/presentation/widgets/card_job_widget.dart';
-import 'package:workify_cl_app/features/home/presentation/widgets/custom_search_bar_widget.dart';
+import 'package:Workify/core/themes/color_theme.dart';
+import 'package:Workify/features/home/presentation/widgets/card_job_widget.dart';
+import 'package:Workify/features/home/presentation/widgets/custom_search_bar_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
