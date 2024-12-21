@@ -1,5 +1,5 @@
+import 'package:Workify/core/themes/color_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:workify_cl_app/core/themes/color_theme.dart';
 
 const TextTheme appTextTheme = TextTheme(
   bodyLarge: TextStyle(

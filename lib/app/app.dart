@@ -1,14 +1,14 @@
+import 'package:Workify/app/routes/router.dart';
+import 'package:Workify/core/networks/dio_client.dart';
+import 'package:Workify/features/authentication/data/datasource/auth_datasource.dart';
+import 'package:Workify/features/authentication/data/repository/auth_repository.dart';
+import 'package:Workify/features/authentication/presentation/cubit/authentication_cubit.dart';
+import 'package:Workify/features/posts/data/datasource/post_datasource.dart';
+import 'package:Workify/features/posts/data/repository/post_repository.dart';
+import 'package:Workify/features/posts/presentation/cubit/post_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:workify_cl_app/app/routes/router.dart';
-import 'package:workify_cl_app/core/networks/dio_client.dart';
-import 'package:workify_cl_app/features/authentication/data/datasource/auth_datasource.dart';
-import 'package:workify_cl_app/features/authentication/data/repository/auth_repository.dart';
-import 'package:workify_cl_app/features/authentication/presentation/cubit/authentication_cubit.dart';
-import 'package:workify_cl_app/features/posts/data/datasource/post_datasource.dart';
-import 'package:workify_cl_app/features/posts/data/repository/post_repository.dart';
-import 'package:workify_cl_app/features/posts/presentation/cubit/post_cubit.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -43,8 +43,8 @@ class MyApp extends StatelessWidget {
         builder: (context, child) {
           return MediaQuery(
             data: MediaQuery.of(context).copyWith(
-              textScaleFactor:
-                  MediaQuery.of(context).textScaleFactor.clamp(1.0, 1.2),
+              // ignore: deprecated_member_use
+              textScaler: TextScaler.linear(MediaQuery.of(context).textScaleFactor.clamp(1.0, 1.2)),
             ),
             child: child!,
           );

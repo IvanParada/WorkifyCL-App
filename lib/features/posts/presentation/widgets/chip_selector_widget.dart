@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:workify_cl_app/core/themes/color_theme.dart';
+import 'package:Workify/core/themes/color_theme.dart';
 
 class ChipSelectorWidget extends StatelessWidget {
   const ChipSelectorWidget({

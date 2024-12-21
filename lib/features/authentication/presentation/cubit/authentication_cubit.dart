@@ -3,18 +3,17 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jwt_decode/jwt_decode.dart';
-import 'package:workify_cl_app/core/enums/enums_state.dart';
-import 'package:workify_cl_app/core/themes/color_theme.dart';
-import 'package:workify_cl_app/core/themes/icon_theme.dart';
-import 'package:workify_cl_app/features/authentication/data/models/login_response_model.dart';
-import 'package:workify_cl_app/features/authentication/data/models/request_reset_password_model.dart';
-import 'package:workify_cl_app/features/authentication/data/models/signup_response_model.dart';
-import 'package:workify_cl_app/features/authentication/data/repository/auth_repository.dart';
-import 'package:workify_cl_app/features/authentication/presentation/widgets/dialog_widget.dart';
+import 'package:Workify/core/enums/enums_state.dart';
+import 'package:Workify/core/themes/color_theme.dart';
+import 'package:Workify/core/themes/icon_theme.dart';
+import 'package:Workify/features/authentication/data/models/login_response_model.dart';
+import 'package:Workify/features/authentication/data/models/request_reset_password_model.dart';
+import 'package:Workify/features/authentication/data/models/signup_response_model.dart';
+import 'package:Workify/features/authentication/data/repository/auth_repository.dart';
+import 'package:Workify/features/authentication/presentation/widgets/dialog_widget.dart';
 
 part 'authentication_state.dart';
 

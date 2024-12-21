@@ -1,8 +1,8 @@
 import 'dart:convert';
+import 'package:Workify/features/authentication/presentation/cubit/authentication_cubit.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:jwt_decode/jwt_decode.dart';
-import 'package:workify_cl_app/features/authentication/presentation/cubit/authentication_cubit.dart';
 
 class HttpClient {
   final _client = http.Client();
