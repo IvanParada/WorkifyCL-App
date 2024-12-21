@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:workify_cl_app/core/themes/color_theme.dart';
 import 'package:workify_cl_app/core/themes/icon_theme.dart';
+import 'package:workify_cl_app/features/authentication/presentation/widgets/dialog_widget.dart';
 
 class CustomSearchBarWidget extends StatelessWidget {
   const CustomSearchBarWidget({
@@ -42,18 +44,21 @@ class CustomSearchBarWidget extends StatelessWidget {
               hintText: 'Buscar...',
             ),
           ),
-          Container(
-            height: 50,
-            width: 50,
-            decoration: BoxDecoration(
-              color: AppColors.primary,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(15),
-              child: SvgPicture.asset(
-                SvgAssets.filter,
-                color: AppColors.textSecondary,
+          GestureDetector(
+            onTap: () {},
+            child: Container(
+              height: 50,
+              width: 50,
+              decoration: BoxDecoration(
+                color: AppColors.primary,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(15),
+                child: SvgPicture.asset(
+                  SvgAssets.filter,
+                  color: AppColors.textSecondary,
+                ),
               ),
             ),
           )

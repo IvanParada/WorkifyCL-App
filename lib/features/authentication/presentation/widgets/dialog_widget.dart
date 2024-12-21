@@ -104,3 +104,42 @@ class DialogWidget extends StatelessWidget {
     );
   }
 }
+
+
+void showCustomAnimatedDialog({
+  required BuildContext context,
+  required String title,
+  required String message,
+  String? icon,
+  String? btnText,
+  Color? colorTypeDialog,
+  void Function()? onTap,
+}) {
+  showGeneralDialog(
+    context: context,
+    barrierColor: Colors.black54, 
+    barrierDismissible: true, 
+    barrierLabel: 'Dismiss',
+    pageBuilder: (context, animation1, animation2) {
+      return Container(); 
+    },
+    transitionBuilder: (context, animation1, animation2, child) {
+      return ScaleTransition(
+        scale: Tween<double>(begin: 0.5, end: 1.0).animate(
+          CurvedAnimation(
+            parent: animation1,
+            curve: Curves.easeInOut,
+          ),
+        ),
+        child: DialogWidget(
+          title: title,
+          message: message,
+          icon: icon,
+          btnText: btnText,
+          colorTypeDialog: colorTypeDialog,
+          onTap: onTap,
+        ),
+      );
+    },
+  );
+}

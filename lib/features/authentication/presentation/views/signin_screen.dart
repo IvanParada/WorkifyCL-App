@@ -11,6 +11,7 @@ import 'package:workify_cl_app/core/themes/icon_theme.dart';
 import 'package:workify_cl_app/core/themes/texts_theme.dart';
 import 'package:workify_cl_app/core/validators.dart';
 import 'package:workify_cl_app/features/authentication/presentation/cubit/authentication_cubit.dart';
+import 'package:workify_cl_app/features/authentication/presentation/widgets/dialog_widget.dart';
 import 'package:workify_cl_app/features/authentication/presentation/widgets/text_field_widget.dart';
 
 class SignInScreen extends StatelessWidget {
@@ -72,11 +73,19 @@ class SignInScreen extends StatelessWidget {
                   BlocListener<AuthenticationCubit, AuthenticationState>(
                     listener: (context, state) {
                       if (state.status == Status.successLogin) {
-                        context.go('/home');
-                      } else if (state.status == Status.failure) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                              content: Text('Error al iniciar sesión')),
+                        GoRouter.of(context).go('/home');
+                      } else if (state.status == Status.failureLogin) {
+                        showCustomAnimatedDialog(
+                          context: context,
+                          title: 'Verifica tus datos',
+                          message:
+                              'Verifica que las credenciales ingresadas sean correctas.',
+                          colorTypeDialog: AppColors.error,
+                          icon: SvgAssets.close,
+                          onTap: () {
+                            Navigator.of(context).pop();
+                            GoRouter.of(context).go('/signin');
+                          },
                         );
                       }
                     },
@@ -127,7 +136,8 @@ class SignInScreen extends StatelessWidget {
                                       ),
                                       TextSpan(
                                         text: 'Recuperar',
-                                        style: appTextTheme.bodyMedium!.copyWith(
+                                        style:
+                                            appTextTheme.bodyMedium!.copyWith(
                                           fontWeight: FontWeight.w600,
                                           color: AppColors.info,
                                         ),

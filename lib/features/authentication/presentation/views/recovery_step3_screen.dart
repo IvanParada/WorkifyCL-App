@@ -144,21 +144,17 @@ class RecoveryStep3Screen extends StatelessWidget {
                                         .resetPassword(password, context);
                                     return;
                                   }
-                                   showDialog<void>(
-                                      context: context,
-                                      barrierColor: Colors.black54,
-                                      builder: (context) {
-                                        return DialogWidget(
-                                          title: '¡Ups!',
-                                          message:
-                                              'Verifica que las contraseñas coincidan.',
-                                          colorTypeDialog: AppColors.info,
-                                          icon: SvgAssets.logoApp,
-                                          onTap: () {
-                                            context.pop();
-                                          },
-                                        );
-                                      });
+                                  showCustomAnimatedDialog(
+                                    context: context,
+                                    title: '¡Ups!',
+                                    message:
+                                        'Verifica que las contraseñas coincidan.',
+                                    colorTypeDialog: AppColors.info,
+                                    icon: SvgAssets.logoApp,
+                                    onTap: () {
+                                      context.pop();
+                                    },
+                                  );
                                 }
                                 return;
                               },

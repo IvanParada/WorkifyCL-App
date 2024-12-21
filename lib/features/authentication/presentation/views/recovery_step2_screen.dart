@@ -125,21 +125,17 @@ class RecoveryStep2Screen extends StatelessWidget {
                                       return;
                                     }
                                   }
-                                  showDialog<void>(
-                                      context: context,
-                                      barrierColor: Colors.black54,
-                                      builder: (context) {
-                                        return DialogWidget(
-                                          title: '¡Ups!',
-                                          message:
-                                              'Verifica que el correo que hayas ingresado sea correcto.',
-                                          colorTypeDialog: AppColors.warning,
-                                          icon: SvgAssets.logoApp,
-                                          onTap: () {
-                                            context.pop();
-                                          },
-                                        );
-                                      });
+                                  showCustomAnimatedDialog(
+                                    context: context,
+                                    title: '¡Ups!',
+                                    message:
+                                        'Verifica que el correo que hayas ingresado sea correcto.',
+                                    colorTypeDialog: AppColors.warning,
+                                    icon: SvgAssets.logoApp,
+                                    onTap: () {
+                                      context.pop();
+                                    },
+                                  );
                                 }
                                 return;
                               },

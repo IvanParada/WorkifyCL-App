@@ -42,7 +42,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
       return;
     }
 
-    emit(state.copyWith(status: Status.failure));
+    emit(state.copyWith(status: Status.failureLogin));
   }
 
   Future<void> signUp(
@@ -69,38 +69,31 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
 
     if (res != null) {
       emit(state.copyWith(codeRequestResetPass: res));
+      showCustomAnimatedDialog(
+        context: context,
+        title: '¡Correo enviado!',
+        message: 'Verifica tu bandeja de entrada e ingresa el código.',
+        colorTypeDialog: AppColors.info,
+        icon: SvgAssets.logoApp,
+        onTap: () {
+          Navigator.of(context).pop();
+          GoRouter.of(context).go('/recovery-step-2');
+        },
+      );
 
-      showDialog<void>(
-          context: context,
-          barrierColor: Colors.black54,
-          builder: (context) {
-            return DialogWidget(
-              title: '¡Correo enviado!',
-              message: 'Verifica tu banedeja de entrada e ingresa el código.',
-              colorTypeDialog: AppColors.info,
-              icon: SvgAssets.logoApp,
-              onTap: () {
-                context.pop();
-                context.push('/recovery-step-2');
-              },
-            );
-          });
       return;
     }
-    showDialog<void>(
-        context: context,
-        barrierColor: Colors.black54,
-        builder: (context) {
-          return DialogWidget(
-            title: '¡Ups!',
-            message: 'Ha ocurrido un problema al enviar el correo.',
-            colorTypeDialog: AppColors.warning,
-            icon: SvgAssets.logoApp,
-            onTap: () {
-              context.pop();
-            },
-          );
-        });
+
+    showCustomAnimatedDialog(
+      context: context,
+      title: '¡Ups!',
+      message: 'Ha ocurrido un problema al enviar el correo.',
+      colorTypeDialog: AppColors.warning,
+      icon: SvgAssets.logoApp,
+      onTap: () {
+        context.pop();
+      },
+    );
   }
 
   Future<void> resetPassword(String newPassword, context) async {
@@ -109,21 +102,17 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     final res = await authRepository.resetPassword(code, newPassword);
 
     if (res) {
-      showDialog<void>(
-          context: context,
-          barrierColor: Colors.black54,
-          builder: (context) {
-            return DialogWidget(
-              title: '¡Bienvenido nuevamente!',
-              message: 'Tu contraseña ha sido actualizada exitosamente.',
-              colorTypeDialog: AppColors.success,
-              icon: SvgAssets.logoApp,
-              onTap: () {
-                context.pop();
-                context.go('/signin');
-              },
-            );
-          });
+      showCustomAnimatedDialog(
+        context: context,
+        title: '¡Bienvenido nuevamente!',
+        message: 'Tu contraseña ha sido actualizada exitosamente.',
+        colorTypeDialog: AppColors.success,
+        icon: SvgAssets.logoApp,
+        onTap: () {
+          Navigator.of(context).pop();
+          GoRouter.of(context).go('/signin');
+        },
+      );
     }
   }
 
@@ -145,19 +134,15 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
       ));
 
       if (state.status == Status.successVerify || state.verifyMessage!) {
-        showDialog<void>(
-            context: context,
-            barrierColor: Colors.black54,
-            builder: (context) {
-              return DialogWidget(
-                title: '¡Bienvenido!',
-                message: 'Has sido registrado exitosamente.',
-                onTap: () {
-                  context.pop();
-                  context.go('/signin');
-                },
-              );
-            });
+        showCustomAnimatedDialog(
+          context: context,
+          title: '¡Bienvenido!',
+          message: 'Has sido registrado exitosamente.',
+          onTap: () {
+            Navigator.of(context).pop();
+            GoRouter.of(context).go('/signin');
+          },
+        );
       }
       return;
     }
