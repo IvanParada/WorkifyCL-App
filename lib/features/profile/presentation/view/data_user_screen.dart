@@ -1,16 +1,14 @@
 import 'package:Workify/core/util_functions.dart';
+import 'package:Workify/features/authentication/presentation/cubit/authentication_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:go_router/go_router.dart';
 import 'package:Workify/core/themes/color_theme.dart';
 import 'package:Workify/core/themes/icon_theme.dart';
 import 'package:Workify/core/themes/texts_theme.dart';
-import 'package:Workify/features/authentication/presentation/cubit/authentication_cubit.dart';
-import 'package:Workify/features/profile/presentation/widgets/profile_option_widget.dart';
 
-class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+class DataUserScreen extends StatelessWidget {
+  const DataUserScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +42,7 @@ class ProfileScreen extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.only(top: 50),
                     child: Text(
-                      'Perfil',
+                      'Mis Datos',
                       style: appTextTheme.bodyLarge,
                     ),
                   ),
@@ -52,43 +50,21 @@ class ProfileScreen extends StatelessWidget {
               ],
             ),
           ),
-          Vgap(20),
-           ProfileOptionWidget(
-            title: 'Mis Datos',
-            icon: SvgAssets.user,
-            onTap: () => context.go('/my-data'),
-          ),
-           ProfileOptionWidget(
-            title: 'Mis Publicaciones',
-            icon: SvgAssets.list,
-            onTap: () => context.go('/home'),
-
-          ),
-          SizedBox(
-            height: size.height * 0.3,
-          ),
-          GestureDetector(
-            onTap: () {
-              BlocProvider.of<AuthenticationCubit>(context).logOut();
-              context.push('/signin');
-            },
-            child: Container(
-              height: size.height * 0.05,
-              width: size.width * 0.6,
-              decoration: BoxDecoration(
-                color: AppColors.error,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Center(
-                child: Text(
-                  'Cerrar sesión',
-                  style: appTextTheme.bodyMedium!.copyWith(
-                    color: AppColors.textSecondary,
-                    fontWeight: FontWeight.w500,
+          BlocBuilder<AuthenticationCubit, AuthenticationState>(
+            builder: (context, state) {
+              return Column(
+                children: [
+                  Vgap(30),
+                  Container(
+                    height: 90,
+                    width: 90,
+                    decoration: BoxDecoration(
+                        color: AppColors.primary,
+                        borderRadius: BorderRadius.circular(5)),
                   ),
-                ),
-              ),
-            ),
+                ],
+              );
+            }
           )
         ],
       ),

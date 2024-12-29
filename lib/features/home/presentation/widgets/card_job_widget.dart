@@ -7,6 +7,7 @@ import 'package:Workify/core/themes/color_theme.dart';
 import 'package:Workify/core/themes/icon_theme.dart';
 import 'package:Workify/core/themes/texts_theme.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 
 class CardJobWidget extends StatelessWidget {
   const CardJobWidget({
@@ -57,8 +58,8 @@ class CardJobWidget extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 20),
-
-                  SizedBox(width: size.width * .55,
+                  SizedBox(
+                    width: size.width * .55,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -103,26 +104,39 @@ class CardJobWidget extends StatelessWidget {
                           ],
                         ),
                         Vgap(5),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: publication.serviceType == 'offeredService'
-                                ? AppColors.success.withOpacity(.4)
-                                : AppColors.info.withOpacity(.4),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 10,
-                              vertical: 2,
-                            ),
-                            child: Text(
-                              serviceType(publication.serviceType),
-                              style: appTextTheme.bodySmall!.copyWith(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 10,
+                        Row(
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                color:
+                                    publication.serviceType == 'offeredService'
+                                        ? AppColors.success.withOpacity(.4)
+                                        : AppColors.info.withOpacity(.4),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 10,
+                                  vertical: 2,
+                                ),
+                                child: Text(
+                                  serviceType(publication.serviceType),
+                                  style: appTextTheme.bodySmall!.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 10,
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
+                            const Spacer(),
+                            Text(
+                              DateFormat('dd-MM-yyyy')
+                                  .format(publication.createdAt),
+                              style: appTextTheme.bodySmall!.copyWith(
+                                color: AppColors.textPrimary.withOpacity(.5),
+                              ),
+                            )
+                          ],
                         ),
                       ],
                     ),

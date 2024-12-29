@@ -9,6 +9,7 @@ import 'package:Workify/features/home/presentation/views/splash_screen.dart';
 import 'package:Workify/features/main_screen.dart';
 import 'package:Workify/features/posts/presentation/views/add_post_screen.dart';
 import 'package:Workify/features/posts/presentation/views/view_post_screen.dart';
+import 'package:Workify/features/profile/presentation/view/data_user_screen.dart';
 import 'package:Workify/features/profile/presentation/view/profile_screen.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
@@ -67,6 +68,10 @@ final GoRouter _router = GoRouter(
         GoRoute(
           path: '/view-post',
           builder: (context, state) =>  ViewPostScreen(),
+        ),
+        GoRoute(
+          path: '/my-data',
+          builder: (context, state) => const DataUserScreen(),
         ),
       ],
     ),

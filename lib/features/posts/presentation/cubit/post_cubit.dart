@@ -53,6 +53,7 @@ class PostCubit extends Cubit<PostState> {
       final res = await postRepository.getPosts();
 
       if (res != null) {
+        res.sort((a, b) => b.createdAt.compareTo(a.createdAt));
         emit(state.copyWith(
           status: Status.successRequest,
           posts: res,

@@ -1,3 +1,4 @@
+import 'package:Workify/core/util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:Workify/core/themes/color_theme.dart';
@@ -8,9 +9,13 @@ class ProfileOptionWidget extends StatelessWidget {
   const ProfileOptionWidget({
     super.key,
     required this.title,
+    required this.icon,
+    required this.onTap,
   });
 
   final String title;
+  final String icon;
+  final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -20,7 +25,7 @@ class ProfileOptionWidget extends StatelessWidget {
         vertical: size.height * .01,
       ),
       child: GestureDetector(
-        onTap: () {},
+        onTap: onTap,
         child: Container(
           height: 50,
           decoration: BoxDecoration(
@@ -43,11 +48,22 @@ class ProfileOptionWidget extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  title,
-                  style: appTextTheme.bodyMedium!.copyWith(
-                    fontWeight: FontWeight.w600,
-                  ),
+                Row(
+                  children: [
+                    SvgPicture.asset(
+                      icon,
+                      width: 20,
+                      height: 20,
+                      color: AppColors.textPrimary,
+                    ),
+                    Hgap(10),
+                    Text(
+                      title,
+                      style: appTextTheme.bodyMedium!.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
                 ),
                 SvgPicture.asset(
                   SvgAssets.arrowRight,
