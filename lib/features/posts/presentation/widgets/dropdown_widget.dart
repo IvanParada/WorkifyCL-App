@@ -22,7 +22,7 @@ class DropdownWidget extends StatelessWidget {
   final double borderRadius;
   final double itemHeight;
   final Function(String?)? onChanged;
-  final bool isEnabled; // Nuevo parámetro
+  final bool isEnabled; 
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +67,7 @@ class DropdownWidget extends StatelessWidget {
                 },
               );
             }
-          : null, // Si no está habilitado, no hace nada
+          : null, 
       child: InputDecorator(
         decoration: InputDecoration(
           labelText: hintText ?? 'Selecciona una opción',
@@ -89,7 +89,7 @@ class DropdownWidget extends StatelessWidget {
           initialValue ?? hintText ?? 'Selecciona una opción',
           style: TextStyle(
             fontSize: 16,
-            color: isEnabled ? Colors.black : Colors.grey, // Cambia el color si está deshabilitado
+            color: isEnabled ? Colors.black : Colors.grey, 
           ),
         ),
       ),
