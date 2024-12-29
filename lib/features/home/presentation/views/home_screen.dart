@@ -7,8 +7,21 @@ import 'package:Workify/features/home/presentation/widgets/custom_search_bar_wid
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<PostCubit>().getPosts();
+    });
+  }
 
   Future<void> _refreshPosts(BuildContext context) async {
     context.read<PostCubit>().getPosts();
