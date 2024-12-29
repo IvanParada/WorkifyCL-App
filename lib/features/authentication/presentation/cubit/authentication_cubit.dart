@@ -2,9 +2,7 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:go_router/go_router.dart';
 import 'package:jwt_decode/jwt_decode.dart';
 import 'package:Workify/core/enums/enums_state.dart';
 import 'package:Workify/core/themes/color_theme.dart';
@@ -61,7 +59,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     emit(state.copyWith(status: Status.failure));
   }
 
-  Future<void> requestResetPassword(email, context) async {
+  Future<void> requestResetPassword(email, context,void Function()? onTap) async {
     emit(state.copyWith(status: Status.loading));
     setEmailResetPass(email);
     final res = await authRepository.requestResetPassword(email);
@@ -74,10 +72,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
         message: 'Verifica tu bandeja de entrada e ingresa el código.',
         colorTypeDialog: AppColors.info,
         icon: SvgAssets.logoApp,
-        onTap: () {
-          Navigator.of(context).pop();
-          GoRouter.of(context).go('/recovery-step-2');
-        },
+        onTap: onTap,
       );
 
       return;
@@ -108,8 +103,8 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
         colorTypeDialog: AppColors.success,
         icon: SvgAssets.logoApp,
         onTap: () {
-          Navigator.of(context).pop();
-          GoRouter.of(context).go('/signin');
+          context.pop();
+          context.push('/signin');
         },
       );
     }
@@ -138,8 +133,8 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
           title: '¡Bienvenido!',
           message: 'Has sido registrado exitosamente.',
           onTap: () {
-            Navigator.of(context).pop();
-            GoRouter.of(context).go('/signin');
+            context.pop();
+            context.push('/signin');
           },
         );
       }

@@ -81,8 +81,8 @@ class SignInScreen extends StatelessWidget {
                           colorTypeDialog: AppColors.error,
                           icon: SvgAssets.close,
                           onTap: () {
-                            Navigator.of(context).pop();
-                            GoRouter.of(context).go('/signin');
+                            context.pop();
+                            context.push('/signin');
                           },
                         );
                       }

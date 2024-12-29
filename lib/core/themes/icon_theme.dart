@@ -23,6 +23,9 @@ class SvgAssets {
   static const String location = 'assets/icons/location.svg';
   static const String search = 'assets/icons/search.svg';
 
+  static const String wsp = 'assets/icons/whatsapp_icon.svg';
+  static const String phone = 'assets/icons/phone.svg';
+
   static const String logoApp = 'assets/img/logo.svg';
 
 }

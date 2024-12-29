@@ -44,7 +44,7 @@ class SignUpVerifyScreen extends StatelessWidget {
                     child: Row(
                       children: [
                         GestureDetector(
-                          onTap: () => Navigator.of(context).pop(),
+                          onTap: () => context.pop(),
                           child: SvgPicture.asset(
                             SvgAssets.arrowLeft,
                             color: AppColors.textSecondary,

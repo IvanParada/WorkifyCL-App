@@ -158,7 +158,7 @@ class RecoveryStep3Screen extends StatelessWidget {
                                     colorTypeDialog: AppColors.info,
                                     icon: SvgAssets.logoApp,
                                     onTap: () {
-                                      context.pop();
+                                      context.push('/signup-step-2');
                                     },
                                   );
                                 }

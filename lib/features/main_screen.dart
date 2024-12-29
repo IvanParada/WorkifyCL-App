@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sliding_clipped_nav_bar/sliding_clipped_nav_bar.dart';
 import 'package:Workify/core/themes/color_theme.dart';
 import 'package:Workify/features/home/presentation/views/home_screen.dart';
@@ -24,21 +25,26 @@ class _MainScreenState extends State<MainScreen> {
   ];
 
   @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexedStack(
-        index: selectedIndex,
-        children: screens,
-      ),
+      body: widget.child, 
       bottomNavigationBar: SizedBox(
         height: 70,
         child: SlidingClippedNavBar(
           backgroundColor: AppColors.primary,
           onButtonPressed: (index) {
             setState(() {
-              
               selectedIndex = index;
             });
+
+            if (index == 0) {
+              context.go('/home');
+            } else if (index == 1) {
+              context.go('/add-post');
+            } else if (index == 2) {
+              context.go('/profile');
+            }
           },
           activeColor: AppColors.textSecondary,
           inactiveColor: AppColors.textSecondary,

@@ -17,4 +17,9 @@ const TextTheme appTextTheme = TextTheme(
     fontWeight: FontWeight.w400,
     color:  AppColors.textPrimary,
   ),
+  titleLarge: TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.bold,
+    color: AppColors.textPrimary
+  )
 );

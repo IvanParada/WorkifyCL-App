@@ -42,7 +42,7 @@ String? validateChileanPhoneNumber(String? value) {
   if (value == null || value.isEmpty) {
     return 'El número de teléfono es obligatorio';
   }
-
+//TODO: MEJORAR VALIDACION +56 NO DISP EN TECLADO
   // final phoneRegExp = RegExp(r'^(?:\+56\s?)?(?:9\s?)?\d{4}\s?\d{4}$');
 
   // if (!phoneRegExp.hasMatch(value.trim())) {
@@ -58,4 +58,31 @@ String? validateTitlePost(String? value) {
   }
 
   return null;
+}
+
+String? validatePricePost(String? value) {
+  if (value == null || value.isEmpty) {
+    return 'El precio es obligatorio';
+  }
+
+  return null;
+}
+
+String? validateTextLength(String? value) {
+  if (value == null || value.isEmpty) {
+    return 'El texto es obligatorio';
+  } else if (value.length < 50) {
+    return 'El texto debe tener al menos 50 caracteres';
+  } else if (value.length > 150) {
+    return 'El texto no debe exceder los 150 caracteres';
+  }
+
+  return null; 
+}
+
+String? validateSelectedRegion(String? selectedRegion) {
+  if (selectedRegion == null || selectedRegion.isEmpty) {
+    return 'Debes seleccionar una región';
+  }
+  return null; 
 }

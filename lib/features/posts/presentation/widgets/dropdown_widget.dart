@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class DropdownWidget extends StatelessWidget {
   const DropdownWidget({
@@ -11,6 +12,7 @@ class DropdownWidget extends StatelessWidget {
     this.borderRadius = 10.0,
     this.itemHeight = 50.0,
     this.onChanged,
+    this.isEnabled = true, // Nuevo parámetro
   });
 
   final String name;
@@ -20,49 +22,52 @@ class DropdownWidget extends StatelessWidget {
   final double borderRadius;
   final double itemHeight;
   final Function(String?)? onChanged;
+  final bool isEnabled; // Nuevo parámetro
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        final double calculatedHeight = math.min(
-          items.length * itemHeight,
-          MediaQuery.of(context).size.height * 0.5,
-        );
+      onTap: isEnabled
+          ? () {
+              final double calculatedHeight = math.min(
+                items.length * itemHeight,
+                MediaQuery.of(context).size.height * 0.5,
+              );
 
-        showModalBottomSheet(
-          context: context,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(borderRadius),
-              topRight: Radius.circular(borderRadius),
-            ),
-          ),
-          builder: (BuildContext context) {
-            return Container(
-              height: calculatedHeight,
-              padding: const EdgeInsets.all(16),
-              child: Scrollbar(
-                thumbVisibility: true,
-                child: ListView.builder(
-                  itemCount: items.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Text(items[index]),
-                      onTap: () {
-                        if (onChanged != null) {
-                          onChanged!(items[index]);
-                        }
-                        Navigator.pop(context);
-                      },
-                    );
-                  },
+              showModalBottomSheet(
+                context: context,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(borderRadius),
+                    topRight: Radius.circular(borderRadius),
+                  ),
                 ),
-              ),
-            );
-          },
-        );
-      },
+                builder: (BuildContext context) {
+                  return Container(
+                    height: calculatedHeight,
+                    padding: const EdgeInsets.all(16),
+                    child: Scrollbar(
+                      thumbVisibility: true,
+                      child: ListView.builder(
+                        itemCount: items.length,
+                        itemBuilder: (context, index) {
+                          return ListTile(
+                            title: Text(items[index]),
+                            onTap: () {
+                              if (onChanged != null) {
+                                onChanged!(items[index]);
+                              }
+                              context.pop();
+                            },
+                          );
+                        },
+                      ),
+                    ),
+                  );
+                },
+              );
+            }
+          : null, // Si no está habilitado, no hace nada
       child: InputDecorator(
         decoration: InputDecoration(
           labelText: hintText ?? 'Selecciona una opción',
@@ -82,7 +87,10 @@ class DropdownWidget extends StatelessWidget {
         ),
         child: Text(
           initialValue ?? hintText ?? 'Selecciona una opción',
-          style: const TextStyle(fontSize: 16),
+          style: TextStyle(
+            fontSize: 16,
+            color: isEnabled ? Colors.black : Colors.grey, // Cambia el color si está deshabilitado
+          ),
         ),
       ),
     );

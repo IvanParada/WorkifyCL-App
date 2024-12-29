@@ -32,7 +32,9 @@ class SplashScreen extends StatelessWidget {
       final hasValidToken = await authCubit.validateToken();
 
       if (hasValidToken) {
-        BlocProvider.of<PostCubit>(context).getRegions();
+        BlocProvider.of<PostCubit>(context)
+          ..getRegions()
+          ..getPosts();
         context.go('/home');
       } else {
         context.go('/signin');
@@ -41,5 +43,4 @@ class SplashScreen extends StatelessWidget {
       context.go('/signin');
     }
   }
-
 }

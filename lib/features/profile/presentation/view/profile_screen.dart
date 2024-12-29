@@ -69,7 +69,7 @@ class ProfileScreen extends StatelessWidget {
           GestureDetector(
             onTap: () {
               BlocProvider.of<AuthenticationCubit>(context).logOut();
-              context.go('/signin');
+              context.push('/signin');
             },
             child: Container(
               height: size.height * 0.05,

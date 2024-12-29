@@ -50,8 +50,7 @@ class RecoveryStep2Screen extends StatelessWidget {
                         GestureDetector(
                           onTap: () => context.pop(),
                           child: SvgPicture.asset(
-                            SvgAssets.logoApp,
-                            height: 80,
+                            SvgAssets.arrowLeft,
                             colorFilter: const ColorFilter.mode(
                               AppColors.textSecondary,
                               BlendMode.srcIn,

@@ -12,4 +12,6 @@ class AppColors {
   static const Color warning = Color(0xFFF9CE07);
   static const Color info = Color(0xFF417DBA);
 
+  static const Color whatsapp = Color(0xFF25D366);
+
 }

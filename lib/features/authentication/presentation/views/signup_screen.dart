@@ -183,8 +183,8 @@ class SignUpScreen extends StatelessWidget {
                                           false;
 
                                   !isVerified
-                                      ? context.go('/signup-step-2')
-                                      : context.go('/signin');
+                                      ? context.push('/signup-step-2')
+                                      : context.push('/signin');
                                 }
                               }
                             },

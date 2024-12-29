@@ -8,12 +8,13 @@ import 'package:Workify/features/home/presentation/views/home_screen.dart';
 import 'package:Workify/features/home/presentation/views/splash_screen.dart';
 import 'package:Workify/features/main_screen.dart';
 import 'package:Workify/features/posts/presentation/views/add_post_screen.dart';
+import 'package:Workify/features/posts/presentation/views/view_post_screen.dart';
 import 'package:Workify/features/profile/presentation/view/profile_screen.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 
-
-final GlobalKey<NavigatorState> _shellNavigatorKey = GlobalKey<NavigatorState>();
+final GlobalKey<NavigatorState> _shellNavigatorKey =
+    GlobalKey<NavigatorState>();
 
 final GoRouter _router = GoRouter(
   initialLocation: '/',
@@ -46,6 +47,7 @@ final GoRouter _router = GoRouter(
       path: '/recovery-step-3',
       builder: (context, state) => RecoveryStep3Screen(),
     ),
+
     ShellRoute(
       navigatorKey: _shellNavigatorKey,
       builder: (context, state, child) => MainScreen(child: child),
@@ -61,6 +63,10 @@ final GoRouter _router = GoRouter(
         GoRoute(
           path: '/add-post',
           builder: (context, state) => const AddPostScreen(),
+        ),
+        GoRoute(
+          path: '/view-post',
+          builder: (context, state) =>  ViewPostScreen(),
         ),
       ],
     ),

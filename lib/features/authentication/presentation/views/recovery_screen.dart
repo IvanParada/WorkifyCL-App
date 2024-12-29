@@ -1,3 +1,4 @@
+import 'package:Workify/core/util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -85,7 +86,7 @@ class RecoveryScreen extends StatelessWidget {
                     'Ingresa tu correo electrónico para solicitar el código de seguirdad y cambiar tu contraseña.',
                     style: appTextTheme.bodyMedium,
                   ),
-                  const SizedBox(height: 20),
+                  Vgap(20),
                   BlocBuilder<AuthenticationCubit, AuthenticationState>(
                     builder: (contextCubit, stateCubit) {
                       return FormBuilder(
@@ -111,7 +112,14 @@ class RecoveryScreen extends StatelessWidget {
 
                                   context
                                       .read<AuthenticationCubit>()
-                                      .requestResetPassword(email, context);
+                                      .requestResetPassword(
+                                    email,
+                                    context,
+                                    () {
+                                      context.pop();
+                                      context.push('/recovery-step-2');
+                                    },
+                                  );
                                 }
                               },
                               child: Container(
