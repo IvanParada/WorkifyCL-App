@@ -47,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     return Skeletonizer(
                       enabled: state.status == Status.loadingRequest,
                       child: ListView.builder(
-                        itemCount: state.posts.length,
+                        itemCount: state.filteredList.length,
                         itemBuilder: (context, index) {
                           return CardJobWidget(index: index);
                         },

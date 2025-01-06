@@ -9,6 +9,11 @@ class PostState extends Equatable {
     this.selectedRegion,
     this.selectedCommunes = const [],
     this.selectedComuna,
+    this.filteredRegion,
+    this.filteredComuna,
+    this.filteredService,
+    this.filteredList = const [],
+    this.searchQuery = '',
   });
 
   final Status status;
@@ -19,23 +24,41 @@ class PostState extends Equatable {
   final List<String> selectedCommunes;
   final String? selectedComuna;
 
+  final LocationsModel? filteredRegion;
+  final String? filteredComuna;
+  final String? filteredService;
+
+  final String searchQuery;
+
+  final List<PostModel> filteredList;
+
   PostState copyWith({
     Status? status,
     List<LocationsModel>? locations,
     List<PostModel>? posts,
+    List<PostModel>? filteredList,
     PostModel? selectedPost,
     LocationsModel? selectedRegion,
     List<String>? selectedCommunes,
     String? selectedComuna,
+    LocationsModel? filteredRegion,
+    String? filteredComuna,
+    String? filteredService,
+    String? searchQuery,
   }) {
     return PostState(
       status: status ?? this.status,
       locations: locations ?? this.locations,
       posts: posts ?? this.posts,
       selectedPost: selectedPost ?? this.selectedPost,
+      filteredList: filteredList ?? this.filteredList,
       selectedRegion: selectedRegion ?? this.selectedRegion,
       selectedCommunes: selectedCommunes ?? this.selectedCommunes,
       selectedComuna: selectedComuna,
+      filteredRegion: filteredRegion,
+      filteredComuna: filteredComuna ,
+      filteredService: filteredService ,
+      searchQuery: searchQuery ?? this.searchQuery, 
     );
   }
 
@@ -44,9 +67,14 @@ class PostState extends Equatable {
         status,
         locations,
         posts,
+        filteredList,
         selectedPost,
         selectedRegion,
         selectedCommunes,
         selectedComuna,
+        filteredRegion,
+        filteredComuna,
+        filteredService,
+        searchQuery,
       ];
 }

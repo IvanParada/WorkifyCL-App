@@ -17,6 +17,7 @@ class TextFieldWidget extends StatelessWidget {
     this.onChanged,
     this.initialValue,
     this.controller,
+    this.prefixText,
   });
 
   final bool? obscureText;
@@ -30,6 +31,7 @@ class TextFieldWidget extends StatelessWidget {
   final ValueChanged<String?>? onChanged;
   final String? initialValue;
   final TextEditingController? controller;
+  final String? prefixText;
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +43,7 @@ class TextFieldWidget extends StatelessWidget {
       obscureText: obscureText ?? false,
       maxLines: maxLines ?? 1,
       decoration: InputDecoration(
+        prefixText: prefixText ?? null,
         suffixIcon: suffixIcon,
         labelText: labelText,
         alignLabelWithHint: true,

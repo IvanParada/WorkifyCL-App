@@ -43,10 +43,10 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
   }
 
   Future<void> signUp(
-      String name, String email, String password, int userPhone) async {
+      String name, String email, String password, String phone) async {
     emit(state.copyWith(status: Status.loading));
 
-    final res = await authRepository.signUp(name, email, password, userPhone);
+    final res = await authRepository.signUp(name, email, password, phone);
     if (res != null) {
       emit(state.copyWith(
         signupUserData: res,
@@ -193,5 +193,10 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
   void logOut() async {
     await secureStorage.deleteAll();
     emit(state.copyWith(status: Status.initial));
+  }
+
+  void setStatus()  {
+    emit(state.copyWith(status: Status.initial));
+
   }
 }

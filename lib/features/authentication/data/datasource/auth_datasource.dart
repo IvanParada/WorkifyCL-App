@@ -31,7 +31,7 @@ class AuthDatasource {
     String name,
     String email,
     String password,
-    int userPhone,
+    String phone,
   ) async {
     try {
       final response = await _dio.post<Map<String, dynamic>>(
@@ -40,7 +40,7 @@ class AuthDatasource {
           'name': name,
           'email': email,
           'password': password,
-          'userPhone': userPhone,
+          'phone': phone,
         },
       );
 

@@ -82,7 +82,7 @@ class SignInScreen extends StatelessWidget {
                           icon: SvgAssets.close,
                           onTap: () {
                             context.pop();
-                            context.push('/signin');
+                            BlocProvider.of<AuthenticationCubit>(context).setStatus();
                           },
                         );
                       }

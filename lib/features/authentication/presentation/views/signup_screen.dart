@@ -149,6 +149,7 @@ class SignUpScreen extends StatelessWidget {
                             labelText: 'Celular',
                             keyboardType: TextInputType.number,
                             validator: validateChileanPhoneNumber,
+                            prefixText: '+56 9 ',
                           ),
                           const SizedBox(height: 40),
                           GestureDetector(
@@ -166,8 +167,9 @@ class SignUpScreen extends StatelessWidget {
                                       formState.fields['email']?.value;
                                   final password =
                                       formState.fields['password']?.value;
-                                  final phone = int.parse(
-                                      formState.fields['phone']?.value);
+                                  final phone =
+                                      formState.fields['phone']?.value;
+                                  final fullPhone = '+569$phone';
 
                                   contextCubit
                                       .read<AuthenticationCubit>()
@@ -175,7 +177,7 @@ class SignUpScreen extends StatelessWidget {
                                         name,
                                         email,
                                         password,
-                                        phone,
+                                        fullPhone,
                                       );
 
                                   final isVerified =

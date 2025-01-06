@@ -19,7 +19,7 @@ class CardJobWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return BlocBuilder<PostCubit, PostState>(builder: (context, state) {
-      final publication = state.posts[index];
+      final publication = state.filteredList[index];
       return Padding(
         padding: EdgeInsets.symmetric(
           horizontal: size.width * .05,

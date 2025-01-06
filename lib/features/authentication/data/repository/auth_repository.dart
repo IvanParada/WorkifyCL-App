@@ -31,14 +31,14 @@ class AuthRepository {
     String name,
     String email,
     String password,
-    int userPhone,
+    String phone,
   ) async {
     try {
       final response = await authDatasource.signUp(
         name,
         email,
         password,
-        userPhone,
+        phone,
       );
 
       if (response != null) {
