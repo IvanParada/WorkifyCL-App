@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:Workify/features/posts/data/models/create_post_model.dart';
 import 'package:Workify/features/posts/data/models/post_model.dart';
 import 'package:bloc/bloc.dart';
@@ -101,6 +99,14 @@ class PostCubit extends Cubit<PostState> {
       selectedCommunes: selectedRegion.communes,
       selectedComuna: null,
     ));
+  }
+
+  void selectPaymentType(String timePay){
+    emit(state.copyWith(
+      paymentType: timePay,
+
+    ));
+    print('state: ${state.paymentType} & value: ${timePay}');
   }
 
   void selectComuna(String comunaName) {

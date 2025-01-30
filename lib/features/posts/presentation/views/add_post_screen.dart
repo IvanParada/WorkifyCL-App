@@ -109,11 +109,40 @@ class AddPostScreen extends StatelessWidget {
                               validator: validateTitlePost,
                             ),
                             const SizedBox(height: 20),
-                            const TextFieldWidget(
-                              name: 'price',
-                              labelText: 'Precio',
-                              keyboardType: TextInputType.name,
-                              validator: validatePricePost,
+                            Row(
+                              children: [
+                                SizedBox(
+                                  width: size.width * 0.4,
+                                  child: const TextFieldWidget(
+                                    name: 'price',
+                                    labelText: 'Precio',
+                                    keyboardType: TextInputType.number,
+                                    validator: validatePricePost,
+                                  ),
+                                ),
+                                const Spacer(),
+                                SizedBox(
+                                  width: size.width * 0.4,
+                                  child: DropdownWidget(
+                                    itemHeight: size.height * 0.075,
+                                    name: 'payment-type',
+                                    hintText: 'tiempo de pago',
+                                    initialValue: stateCubit.paymentType,
+                                    items: const [
+                                      'Por Hora',
+                                      'Por Día',
+                                      'Por trabajo'
+                                    ],
+                                    onChanged: (value) {
+                                      if (value != null) {
+                                        context
+                                            .read<PostCubit>()
+                                            .selectPaymentType(value);
+                                      }
+                                    },
+                                  ),
+                                ),
+                              ],
                             ),
                             const SizedBox(height: 20),
                             const TextFieldWidget(
@@ -190,10 +219,19 @@ class AddPostScreen extends StatelessWidget {
                                         .fields['description']?.value as String;
                                     final category = formState
                                         .fields['category']?.value as String;
+                                    final paymentType =
+                                        stateCubit.paymentType.toString();
 
                                     final createPostModel = CreatePostModel(
                                       title: title,
                                       price: price,
+                                      paymentType: paymentType == 'Por Hora'
+                                          ? 'hour'
+                                          : paymentType == 'Por día'
+                                              ? 'day'
+                                              : paymentType == 'Por Trabajo'
+                                                  ? 'work'
+                                                  : 'month',
                                       description: description,
                                       serviceType:
                                           category == 'Ofrecer Servicio'
@@ -209,34 +247,6 @@ class AddPostScreen extends StatelessWidget {
 
                                     formState.reset();
                                     context.read<PostCubit>().resetSelections();
-                                    // if (stateCubit.status == Status.success) {
-                                    //   showCustomAnimatedDialog(
-                                    //     context: context,
-                                    //     title: 'Publicación Creada',
-                                    //     message:
-                                    //         'La publicación ha sido creada con éxito.',
-                                    //     colorTypeDialog: AppColors.success,
-                                    //     icon: SvgAssets.check,
-                                    //     onTap: () {
-                                    //       context.pop();
-                                    //       context.go('/home');
-                                    //     },
-                                    //   );
-                                    // }
-                                    // if (stateCubit.status == Status.failure) {
-                                    //   showCustomAnimatedDialog(
-                                    //     context: context,
-                                    //     title: 'Ups',
-                                    //     message:
-                                    //         'Ha ocurrido un problema al crear la publicación.',
-                                    //     colorTypeDialog: AppColors.warning,
-                                    //     icon: SvgAssets.logoApp,
-                                    //     onTap: () {
-                                    //       context.pop();
-                                    //       context.go('/home');
-                                    //     },
-                                    //   );
-                                    // }
                                   }
                                 },
                                 child: Container(

@@ -7,6 +7,7 @@ part 'create_post_model.g.dart';
 class CreatePostModel {
   final String title;
   final double price;
+  final String paymentType;
   final String description;
   final String serviceType;
   final String regions;
@@ -15,6 +16,7 @@ class CreatePostModel {
   CreatePostModel({
     required this.title,
     required this.price,
+    required this.paymentType,
     required this.description,
     required this.serviceType,
     required this.regions,

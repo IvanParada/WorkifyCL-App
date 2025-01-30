@@ -33,7 +33,8 @@ class ChipSelectorWidget extends StatelessWidget {
               spacing: 8.0,
               children: options.map((option) {
                 final isSelected = field.value == option;
-                final selectedColor = option == 'Ofrecer Servicio' || option == 'Servicio Ofrecido'
+                final selectedColor = option == 'Ofrecer Servicio' ||
+                        option == 'Servicio Ofrecido'
                     ? AppColors.success.withOpacity(.5)
                     : AppColors.info.withOpacity(.5);
                 return ChoiceChip(
@@ -41,7 +42,8 @@ class ChipSelectorWidget extends StatelessWidget {
                     option,
                     style: TextStyle(
                       color: isSelected
-                          ? option == 'Ofrecer Servicio' || option == 'Servicio Ofrecido'
+                          ? option == 'Ofrecer Servicio' ||
+                                  option == 'Servicio Ofrecido'
                               ? AppColors.success
                               : AppColors.info
                           : AppColors.textPrimary,

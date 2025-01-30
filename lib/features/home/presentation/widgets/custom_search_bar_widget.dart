@@ -1,3 +1,4 @@
+import 'package:Workify/core/themes/texts_theme.dart';
 import 'package:Workify/features/posts/data/models/locations_model.dart';
 import 'package:Workify/features/posts/presentation/cubit/post_cubit.dart';
 import 'package:Workify/features/posts/presentation/widgets/chip_selector_widget.dart';
@@ -136,7 +137,7 @@ class CustomSearchBarWidget extends StatelessWidget {
                                   );
                                   postCubit
                                       .updateFilteredRegion(selectedRegion);
-                                  setState(() {}); 
+                                  setState(() {});
                                 },
                               ),
                               const SizedBox(height: 20),
@@ -156,26 +157,60 @@ class CustomSearchBarWidget extends StatelessWidget {
                                     postCubit.state.filteredRegion != null,
                                 onChanged: (value) {
                                   postCubit.updateFilteredComuna(value);
-                                  setState(() {}); 
+                                  setState(() {});
                                 },
                               ),
                               const Spacer(),
                               Row(
                                 children: [
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                      postCubit.getFilteredPosts();
-                                    },
-                                    child: const Text('Aplicar Filtros'),
-                                  ),
-                                  const Spacer(),
-                                  ElevatedButton(
-                                    onPressed: () {
+                                  GestureDetector(
+                                    onTap: () {
                                       Navigator.pop(context);
                                       postCubit.resetFilters();
                                     },
-                                    child: const Text('Restablecer'),
+                                    child: Container(
+                                      height: size.height * 0.05,
+                                      width: size.width * 0.4,
+                                      decoration: BoxDecoration(
+                                        color: AppColors.error,
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          'Restablecer',
+                                          style:
+                                              appTextTheme.bodyMedium!.copyWith(
+                                            color: AppColors.textSecondary,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  const Spacer(),
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.pop(context);
+                                      postCubit.getFilteredPosts();
+                                    },
+                                    child: Container(
+                                      height: size.height * 0.05,
+                                      width: size.width * 0.4,
+                                      decoration: BoxDecoration(
+                                        color: AppColors.primary,
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          'Aplicar',
+                                          style:
+                                              appTextTheme.bodyMedium!.copyWith(
+                                            color: AppColors.textSecondary,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),

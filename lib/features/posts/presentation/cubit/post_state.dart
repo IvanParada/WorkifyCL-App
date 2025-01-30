@@ -5,6 +5,7 @@ class PostState extends Equatable {
     this.status = Status.initial,
     this.locations = const [],
     this.posts = const [],
+    this.paymentType,
     this.selectedPost,
     this.selectedRegion,
     this.selectedCommunes = const [],
@@ -19,6 +20,7 @@ class PostState extends Equatable {
   final Status status;
   final List<LocationsModel> locations;
   final List<PostModel> posts;
+  final String? paymentType;
   final PostModel? selectedPost;
   final LocationsModel? selectedRegion;
   final List<String> selectedCommunes;
@@ -37,6 +39,7 @@ class PostState extends Equatable {
     List<LocationsModel>? locations,
     List<PostModel>? posts,
     List<PostModel>? filteredList,
+    String? paymentType,
     PostModel? selectedPost,
     LocationsModel? selectedRegion,
     List<String>? selectedCommunes,
@@ -51,14 +54,15 @@ class PostState extends Equatable {
       locations: locations ?? this.locations,
       posts: posts ?? this.posts,
       selectedPost: selectedPost ?? this.selectedPost,
+      paymentType: paymentType ?? this.paymentType,
       filteredList: filteredList ?? this.filteredList,
       selectedRegion: selectedRegion ?? this.selectedRegion,
       selectedCommunes: selectedCommunes ?? this.selectedCommunes,
       selectedComuna: selectedComuna,
       filteredRegion: filteredRegion,
-      filteredComuna: filteredComuna ,
-      filteredService: filteredService ,
-      searchQuery: searchQuery ?? this.searchQuery, 
+      filteredComuna: filteredComuna,
+      filteredService: filteredService,
+      searchQuery: searchQuery ?? this.searchQuery,
     );
   }
 
@@ -68,6 +72,7 @@ class PostState extends Equatable {
         locations,
         posts,
         filteredList,
+        paymentType,
         selectedPost,
         selectedRegion,
         selectedCommunes,

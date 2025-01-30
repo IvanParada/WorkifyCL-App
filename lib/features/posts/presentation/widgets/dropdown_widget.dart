@@ -12,7 +12,7 @@ class DropdownWidget extends StatelessWidget {
     this.borderRadius = 10.0,
     this.itemHeight = 50.0,
     this.onChanged,
-    this.isEnabled = true, // Nuevo parámetro
+    this.isEnabled = true,
   });
 
   final String name;
