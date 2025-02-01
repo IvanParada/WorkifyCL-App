@@ -1,4 +1,5 @@
 import 'package:Workify/features/posts/data/models/create_post_model.dart';
+import 'package:Workify/features/posts/data/models/post_id_model.dart';
 import 'package:Workify/features/posts/data/models/post_model.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';

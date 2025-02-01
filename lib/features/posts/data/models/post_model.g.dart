@@ -2,15 +2,15 @@
 
 part of 'post_model.dart';
 
-// ***************************************************************************
+// **************************************************************************
 // JsonSerializableGenerator
-// ***************************************************************************
+// **************************************************************************
 
 PostModel _$PostModelFromJson(Map<String, dynamic> json) => PostModel(
       id: json['_id'] as String,
       authorId: json['authorId'] as String,
       title: json['title'] as String,
-      price: json['price'] as int,
+      price: (json['price'] as num).toInt(),
       description: json['description'] as String,
       serviceType: json['serviceType'] as String,
       regions: json['regions'] as String,

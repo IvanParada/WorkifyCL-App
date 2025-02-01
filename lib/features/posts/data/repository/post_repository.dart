@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:Workify/features/posts/data/datasource/post_datasource.dart';
 import 'package:Workify/features/posts/data/models/locations_model.dart';
+import 'package:Workify/features/posts/data/models/post_id_model.dart';
 import 'package:Workify/features/posts/data/models/post_model.dart';
 
 class PostRepository {
@@ -42,13 +43,13 @@ class PostRepository {
     }
   }
 
-  Future<PostModel?> getPostsById(id) async {
+  Future<PostIdModel?> getPostsById(id) async {
     try {
 
       final response = await postDatasource.getPostsById(id);
 
       if (response != null) {
-        return PostModel.fromJson(response);
+        return PostIdModel.fromJson(response);
       }
 
       return null;

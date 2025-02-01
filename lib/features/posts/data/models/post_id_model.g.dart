@@ -1,24 +1,24 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'create_post_model.dart';
+part of 'post_id_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-CreatePostModel _$CreatePostModelFromJson(Map<String, dynamic> json) =>
-    CreatePostModel(
+PostIdModel _$PostIdModelFromJson(Map<String, dynamic> json) => PostIdModel(
       title: json['title'] as String,
-      price: (json['price'] as num).toDouble(),
+      price: (json['price'] as num).toInt(),
       paymentType: json['paymentType'] as String,
       description: json['description'] as String,
       serviceType: json['serviceType'] as String,
       regions: json['regions'] as String,
       comuna: json['comuna'] as String,
+      createdAt: DateTime.parse(json['createdAt'] as String),
+      authorEmail: json['authorEmail'] as String,
     );
 
-Map<String, dynamic> _$CreatePostModelToJson(CreatePostModel instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$PostIdModelToJson(PostIdModel instance) => <String, dynamic>{
       'title': instance.title,
       'price': instance.price,
       'paymentType': instance.paymentType,
@@ -26,4 +26,6 @@ Map<String, dynamic> _$CreatePostModelToJson(CreatePostModel instance) =>
       'serviceType': instance.serviceType,
       'regions': instance.regions,
       'comuna': instance.comuna,
+      'createdAt': instance.createdAt.toIso8601String(),
+      'authorEmail': instance.authorEmail,
     };

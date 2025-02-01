@@ -17,4 +17,3 @@ Map<String, dynamic> _$RequestResetPasswordModelToJson(
     <String, dynamic>{
       'code': instance.code,
     };
-

@@ -21,7 +21,7 @@ class PostState extends Equatable {
   final List<LocationsModel> locations;
   final List<PostModel> posts;
   final String? paymentType;
-  final PostModel? selectedPost;
+  final PostIdModel? selectedPost;
   final LocationsModel? selectedRegion;
   final List<String> selectedCommunes;
   final String? selectedComuna;
@@ -40,7 +40,7 @@ class PostState extends Equatable {
     List<PostModel>? posts,
     List<PostModel>? filteredList,
     String? paymentType,
-    PostModel? selectedPost,
+    PostIdModel? selectedPost,
     LocationsModel? selectedRegion,
     List<String>? selectedCommunes,
     String? selectedComuna,
