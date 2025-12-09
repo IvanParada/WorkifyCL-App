@@ -64,13 +64,27 @@ class CustomSearchBarWidget extends StatelessWidget {
                     ),
                   ),
                   builder: (BuildContext context) {
+                    final postCubit = context.read<PostCubit>();
+
+                    // Valores iniciales del filtro (estado actual del cubit)
+                    String? selectedService = postCubit.state.filteredService ==
+                            'offeredService'
+                        ? 'Servicio Ofrecido'
+                        : postCubit.state.filteredService == 'requestService'
+                            ? 'Servicio Solicitado'
+                            : null;
+
+                    String? selectedRegion =
+                        postCubit.state.filteredRegion?.name;
+                    String? selectedComuna = postCubit.state.filteredComuna;
+
                     return StatefulBuilder(
                       builder: (context, setState) {
-                        final postCubit = context.read<PostCubit>();
+                        final size = MediaQuery.of(context).size;
 
                         return Container(
                           height: 500,
-                          width: MediaQuery.of(context).size.width,
+                          width: size.width,
                           padding: const EdgeInsets.all(16),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,25 +99,21 @@ class CustomSearchBarWidget extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(height: 20),
-                              Text(
-                                'Tipo de Servicio',
-                                style: Theme.of(context).textTheme.bodyMedium,
-                              ),
+
+                              const Text('Tipo de Servicio'),
                               const SizedBox(height: 10),
                               ChipSelectorWidget(
                                 name: 'category',
                                 options: const [
                                   'Servicio Ofrecido',
-                                  'Servicio Solicitado'
+                                  'Servicio Solicitado',
                                 ],
-                                initialValue: postCubit.state.filteredService ==
-                                        'offeredService'
-                                    ? 'Servicio Ofrecido'
-                                    : postCubit.state.filteredService ==
-                                            'requestService'
-                                        ? 'Servicio Solicitado'
-                                        : null,
+                                initialValue: selectedService,
                                 onChanged: (value) {
+                                  setState(() {
+                                    selectedService = value;
+                                  });
+
                                   postCubit.updateFilteredService(
                                     value == 'Servicio Ofrecido'
                                         ? 'offeredService'
@@ -111,14 +121,13 @@ class CustomSearchBarWidget extends StatelessWidget {
                                             ? 'requestService'
                                             : null,
                                   );
-                                  setState(() {});
                                 },
                               ),
+
                               const SizedBox(height: 20),
-                              Text(
-                                'Región',
-                                style: Theme.of(context).textTheme.bodyMedium,
-                              ),
+
+                              // Región
+                              const Text('Región'),
                               const SizedBox(height: 10),
                               DropdownWidget(
                                 name: 'region',
@@ -126,43 +135,49 @@ class CustomSearchBarWidget extends StatelessWidget {
                                 items: postCubit.state.locations
                                     .map((loc) => loc.name)
                                     .toList(),
-                                initialValue:
-                                    postCubit.state.filteredRegion?.name,
+                                initialValue: selectedRegion,
                                 onChanged: (value) {
-                                  final selectedRegion =
-                                      postCubit.state.locations.firstWhere(
-                                    (loc) => loc.name == value,
-                                    orElse: () =>
-                                        LocationsModel(name: '', communes: []),
-                                  );
-                                  postCubit
-                                      .updateFilteredRegion(selectedRegion);
-                                  setState(() {});
+                                  final region = postCubit.state.locations
+                                      .firstWhere((loc) => loc.name == value);
+
+                                  setState(() {
+                                    selectedRegion = region.name;
+                                    selectedComuna = null;
+                                  });
+
+                                  postCubit.updateFilteredRegion(region);
                                 },
                               ),
+
                               const SizedBox(height: 20),
-                              Text(
-                                'Comuna',
-                                style: Theme.of(context).textTheme.bodyMedium,
-                              ),
+
+                              const Text('Comuna'),
                               const SizedBox(height: 10),
                               DropdownWidget(
                                 name: 'comuna',
                                 hintText: 'Selecciona una comuna',
-                                items: postCubit.state.filteredRegion != null
-                                    ? postCubit.state.filteredRegion!.communes
+                                items: selectedRegion != null
+                                    ? postCubit.state.locations
+                                        .firstWhere(
+                                            (loc) => loc.name == selectedRegion)
+                                        .communes
                                     : [],
-                                initialValue: postCubit.state.filteredComuna,
-                                isEnabled:
-                                    postCubit.state.filteredRegion != null,
+                                initialValue: selectedComuna,
+                                isEnabled: selectedRegion != null,
                                 onChanged: (value) {
+                                  setState(() {
+                                    selectedComuna = value;
+                                  });
+
                                   postCubit.updateFilteredComuna(value);
-                                  setState(() {});
                                 },
                               ),
+
                               const Spacer(),
+
                               Row(
                                 children: [
+                                  // Reset
                                   GestureDetector(
                                     onTap: () {
                                       Navigator.pop(context);
@@ -188,6 +203,7 @@ class CustomSearchBarWidget extends StatelessWidget {
                                     ),
                                   ),
                                   const Spacer(),
+
                                   GestureDetector(
                                     onTap: () {
                                       Navigator.pop(context);
