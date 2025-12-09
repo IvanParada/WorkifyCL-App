@@ -28,7 +28,11 @@ class SvgAssets {
 
   static const String user = 'assets/icons/user.svg';
   static const String list = 'assets/icons/list.svg';
+  static const String edit = 'assets/icons/edit_pen.svg';
+
+  //Images
 
   static const String logoApp = 'assets/img/logo.svg';
+  static const String wProfile = 'assets/img/w_profile.png';
 
 }

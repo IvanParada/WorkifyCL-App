@@ -29,7 +29,7 @@ class PostRepository {
       final response = await postDatasource.getPosts();
 
       if (response != null) {
-        final List<PostModel> posts = (response as List)
+        final List<PostModel> posts = (response)
             .map((item) => PostModel.fromJson(item as Map<String, dynamic>))
             .toList();
 

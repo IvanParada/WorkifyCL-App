@@ -43,7 +43,7 @@ class TextFieldWidget extends StatelessWidget {
       obscureText: obscureText ?? false,
       maxLines: maxLines ?? 1,
       decoration: InputDecoration(
-        prefixText: prefixText ?? null,
+        prefixText: prefixText,
         suffixIcon: suffixIcon,
         labelText: labelText,
         alignLabelWithHint: true,

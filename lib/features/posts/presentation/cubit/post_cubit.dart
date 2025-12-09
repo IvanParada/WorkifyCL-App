@@ -107,7 +107,7 @@ class PostCubit extends Cubit<PostState> {
       paymentType: timePay,
 
     ));
-    print('state: ${state.paymentType} & value: ${timePay}');
+    print('state: ${state.paymentType} & value: $timePay');
   }
 
   void selectComuna(String comunaName) {

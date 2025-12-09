@@ -96,8 +96,7 @@ class ViewPostScreen extends StatelessWidget {
                               color: AppColors.textPrimary.withOpacity(.5),
                               borderRadius: BorderRadius.circular(8.0),
                               image: const DecorationImage(
-                                image: NetworkImage(
-                                    'https://es.digitaltrends.com/wp-content/uploads/2023/12/google-chrome.jpeg?resize=1000%2C600&p=1'), // URL aleatoria
+                                image: NetworkImage('https://media.istockphoto.com/id/1308087213/es/foto/patio-trasero-inglés-jardín-de-cabañas-colorida-planta-de-floración-y-césped-de-hierba-verde.jpg?s=612x612&w=0&k=20&c=GcakAIQnKgSroTpho_h14wax6UH675to1yonXvM05iE='),
                                 fit: BoxFit.cover,
                               ),
                             ),

@@ -19,7 +19,7 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.background,
       body: Column(
-        children: [
+        children: <Widget>[
           Container(
             decoration: const BoxDecoration(
                 color: AppColors.primary,
@@ -56,12 +56,13 @@ class ProfileScreen extends StatelessWidget {
            ProfileOptionWidget(
             title: 'Mis Datos',
             icon: SvgAssets.user,
-            onTap: () => context.go('/my-data'),
+            onTap: () => context.push('/my-data'),
           ),
+          //TODO: Hacer vista de mis publicaciones para visualizar/eliminar/editar
            ProfileOptionWidget(
             title: 'Mis Publicaciones',
             icon: SvgAssets.list,
-            onTap: () => context.go('/home'),
+            onTap: () => context.push('/home'),
 
           ),
           SizedBox(
